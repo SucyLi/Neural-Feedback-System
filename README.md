@@ -20,15 +20,15 @@ combineModels(): combine models using AdaBoostM1. Boost a weak classifier by run
 modelEvaluation(): evaluate model performance. Return statistics showing the performance of the model used\
 
 #### FmriClassify.java
-main(): 
-load training and test datasets 
-implement classifier with highest accuracy on test set
-get classification result on test set
-generate binary classification results based on ground truth labels 
+main(): \
+load training and test datasets \
+implement classifier with highest accuracy on test set \
+get classification result on test set \
+generate binary classification results based on ground truth labels \
 
 ### NeuralFeedbackInterface
-readResult(): read binary classification results
-displayResult: show results as a car racing game interface
+readResult(): read binary classification results \
+displayResult(): show results as a car racing game interface
 
 ## Instructions to run the code 
 ### Download, install and import Weka machine learning library
