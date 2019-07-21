@@ -27,8 +27,8 @@ get classification result on test set
 generate binary classification results based on ground truth labels 
 
 ### NeuralFeedbackInterface
-read binary classification results\
-show results as a game interface
+readResult(): read binary classification results
+displayResult: show results as a car racing game interface
 
 ## Instructions to run the code 
 ### Download, install and import Weka machine learning library
