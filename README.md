@@ -63,7 +63,7 @@ String actionID<br/>
 boolean bActionSuccessful//true or false<br/>
 double AccuracyPercent
 ```
-##### GameInputReader 
+#### GameInputReader 
 This class will be the main communication between machine learning classes and the GUI classes.<br/>
 It will read input and fill out InputData and PlayerStats
 
