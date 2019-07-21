@@ -37,7 +37,7 @@ Cleans up game window
 ```java
 Window gameWindow
 ```
-##### DisplayUpdater
+#### DisplayUpdater
 This class will update the game images and GUI.<br/>
 For instance, this class will also update positions for the player character/vehicle <br/>
 It will thus receive info from GameInputReader and PlayerStats.
