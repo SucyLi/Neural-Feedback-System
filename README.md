@@ -26,10 +26,6 @@ implement classifier with highest accuracy on test set \
 get classification result on test set \
 generate binary classification results based on ground truth labels 
 
-### NeuralFeedbackInterface
-readResult(): read binary classification results \
-displayResult(): show results as a car racing game interface
-
 ### Game GUI
 #### WindowManager
 Creates game window<br/>
@@ -51,16 +47,16 @@ Int damage
 #### PlayerStats
 This class will keep track of the player's data.<br/>
 ```java
-Int Score<br/>
-double averageAccuracy<br/>
+Int Score
+double averageAccuracy
 String mostSuccessfulAction //the action with the highest average accuracy
 Vehicle vehicle
 ```
 #### GameInputData
 This class will provide a structure for the data of each input instance.  Will include:<br/>
 ```java
-String actionID<br/>
-boolean bActionSuccessful//true or false<br/>
+String actionID
+boolean bActionSuccessful//true or false
 double AccuracyPercent
 ```
 #### GameInputReader 
