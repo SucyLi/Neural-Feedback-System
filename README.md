@@ -2,8 +2,14 @@
 
 ## Classes and methods
 ### Classifier
+#### FmriClassificationModel.java
 read preprocessed fMRI data csv files\
-implement classifiers such as Support Vector Machine (SVM)\
+implement classifiers such as Naive Bayes, Support Vector Machine and Random Forest etc.\
+evaluate model performance\
+
+#### FmriClassify.java
+implement classifier with highest accuracy on test set\
+get classification result on test set\
 generate binary classification results based on ground truth labels 
 
 ### NeuralFeedbackInterface
