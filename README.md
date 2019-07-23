@@ -40,14 +40,14 @@ It will thus receive info from GameInputReader and PlayerStats.
 #### VehicleStats
 The vehicle the player is driving (either a car or hot air balloon)
 ```java
-Int positionX
-Int positionY
-Int damage
+int positionX
+int positionY
+int damage
 ```
 #### PlayerStats
 This class will keep track of the player's data.<br/>
 ```java
-Int Score
+int Score
 double averageAccuracy
 String mostSuccessfulAction //the action with the highest average accuracy
 Vehicle vehicle
