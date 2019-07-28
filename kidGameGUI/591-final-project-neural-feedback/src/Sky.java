@@ -1,5 +1,6 @@
 
 public class Sky {
+	final float SCROLL_SPEED = 0.3f;
 	//sky
 	float x;
 	float y;
@@ -9,11 +10,11 @@ public class Sky {
 		this.y = y;
 	}
 	
-	public void scroll() {
-		this.x -= 0.1;
+	public void scroll(int mod) {
+		this.y += SCROLL_SPEED * mod;
 		
-		if (this.x <= -SetupGame.SCREEN_X) {
-			this.x = SetupGame.SCREEN_X;
+		if (this.y >= SetupGame.SCREEN_Y) {
+			this.y =  ((-SetupGame.SKY_DIMENSION_Y * 2) + SetupGame.SCREEN_Y);
 		}
 	}
 }

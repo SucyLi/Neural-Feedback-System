@@ -2,6 +2,8 @@ import org.newdawn.slick.Input;
 
 public class InputProcessor {
 	final int INPUT_WAIT = 3000;
+	final int LABEL_WAIT = INPUT_WAIT * 2;
+	int lastLabelDrawTime = 0;
 	
 	//input
 	boolean bInputSuccess = false;
@@ -35,15 +37,25 @@ public class InputProcessor {
 //		numSuccess+= 1;
 	}
 	
+	//checks for keyboard input
 	public void updateInputKeyboard(Input input, long currTime) {
 		if (input.isKeyDown(Input.KEY_W) && (!this.bInputSuccess)) {
 			updateInputChecks(currTime);
 		}
 	}
 	
-	public void updateInputData(int input, long currTime) {
-		if (input == 1){
+	//checks for data input
+	public void updateInputData(boolean b, long currTime) {
+		if (b){
 			updateInputChecks(currTime);
 		}
+	}
+	
+	public boolean shouldDrawLabel(long currTime) {
+		if (((currTime - this.lastLabelDrawTime) > LABEL_WAIT) && (!this.bInputSuccess)){
+			return true;
+		}
+		
+		return false;
 	}
 }

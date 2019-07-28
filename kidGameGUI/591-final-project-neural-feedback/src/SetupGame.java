@@ -6,8 +6,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class SetupGame extends StateBasedGame {
-	public static int SCREEN_X = 1900;
+	public static int SCREEN_X = 960;
 	public static int SCREEN_Y = 900;
+	final static int SKY_DIMENSION_Y = 2085;
 	
 	public static final String title = "Neural Network Motor Game";
 	public static final int menu = 0;
