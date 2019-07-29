@@ -1,7 +1,4 @@
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -30,16 +27,5 @@ public class SetupGame extends StateBasedGame {
 		this.getState(menu).init(gc, this);
 		this.getState(play).init(gc, this);
 		this.enterState(menu);
-	}
-	
-	public static void main(String[] args) throws SlickException {
-		
-		SetupGame set = new SetupGame("Setup Test");
-		AppGameContainer app = new AppGameContainer(set);
-		
-		app.setDisplayMode(SCREEN_X, SCREEN_Y, false);
-		//app.setAlwaysRender(true);
-		
-		app.start();
 	}
 }
