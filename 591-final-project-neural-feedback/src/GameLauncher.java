@@ -1,29 +1,31 @@
-import java.util.ArrayList;
-
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.SlickException;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameLauncher {
+	static int milliseconds;
+	static boolean bActivate;
 	
-	public static void main(String[] args) throws SlickException {
-		int SCREEN_X = 960;
-		int SCREEN_Y = 900;
+	public static void main(String[] args){
 		
-		FmriClassification c = new FmriClassification();
-		c.svmClassify();
-		c.printToText();
-		ArrayList<String> actualMoves = c.getActualMoves();
-		ArrayList<String> predictedMoves = c.getPredictions();
+		Thread threadClinician = new Thread(new ThreadClinician());
+		Thread threadGame = new Thread(new ThreadGame());
+	
 		
-		GUIClinician clinician = new GUIClinician();
-		clinician.draw(actualMoves, predictedMoves);
+		Timer timer = new Timer();
 		
-		SetupGame set = new SetupGame("Setup Test");
-		AppGameContainer app = new AppGameContainer(set);
-		app.setDisplayMode(SCREEN_X, SCREEN_Y, false);
-		//app.setAlwaysRender(true);
-		app.start();
+		TimerTask timerTask = new TimerTask() {
+	        @Override
+	        public void run() { 
+	            bActivate = true;
+	        }
+	    };
+	    
+	    //this gets set for only one loop of main, need to make sure all
+	    //sub-loops that require bActivate are hit.
+		timer.scheduleAtFixedRate(timerTask, 2432, 1);
+		
+		threadClinician.start();
+		threadGame.start();
 	}	
 	
 }

@@ -44,7 +44,7 @@ public class Play extends BasicGameState{
 		// TODO Auto-generated method stub
 		
 		Image imgBalloon = new Image("sprites/balloon.png");
-		Image imgSky = new Image("sprites/bg-sky-vert-1.png");
+		Image imgSky = new Image ("sprites/bg-sky-vert-1.png");
 		Image imgSky2 = new Image("sprites/bg-sky-vert-2.png");
 		Image labelFoot = new Image("sprites/label-foot.png");
 		Image labelFinger = new Image("sprites/label-finger.png");
