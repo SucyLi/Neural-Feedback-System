@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class DataProcessor {
 	private int arrayIndex = 0;
+	private boolean rightMove;
 	
 	//check if the game is using data
 	//this should check if data is properly loaded and if so, return true
@@ -23,10 +24,16 @@ public class DataProcessor {
 		ArrayList<String> predictedMoves = cl.getPredictions();
 		if (actualMoves.get(arrayIndex).equals(predictedMoves.get(arrayIndex))){
 			arrayIndex++;
+			rightMove = true;
 			return true;
 		}
 		arrayIndex++;
+		rightMove = false;
 		return false;
+	}
+
+	public boolean isRightMove() {
+		return rightMove;
 	}
 
 	public int getArrayIndex() {

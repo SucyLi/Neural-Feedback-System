@@ -86,6 +86,13 @@ public class GUIClinician {
 				PennDraw.text(0.75, 0.94, "Detected: " + predLabel);
 
 				PennDraw.advance();
+				
+				try {
+					Thread.sleep(120);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

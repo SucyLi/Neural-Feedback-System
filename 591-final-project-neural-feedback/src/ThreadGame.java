@@ -13,7 +13,6 @@ public class ThreadGame extends Thread{
 			app = new AppGameContainer(set);
 			app.setDisplayMode(SCREEN_X, SCREEN_Y, false);
 			app.setAlwaysRender(true);
-			app.setTargetFrameRate(30);
 			app.start();
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

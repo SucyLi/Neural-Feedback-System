@@ -24,6 +24,14 @@ public class Menu extends BasicGameState{
 		// TODO Auto-generated method stub
 		Input input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_ENTER)) {
+			Thread threadClinician = new ThreadClinician();	
+			threadClinician.start();
+			try {
+				Thread.sleep(3800);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			sbg.enterState(1);
 		}
 		

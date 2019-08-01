@@ -73,10 +73,4 @@ public class FmriClassification {
 		return actualMoves;
 	}
 
-	public static void main(String[] args) {
-		FmriClassification c = new FmriClassification();
-		c.svmClassify();
-		c.printToText();
-	}
-
 }
