@@ -1,15 +1,10 @@
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-public class ThreadGame implements Runnable{
-	boolean bActivateAction;
+public class ThreadGame extends Thread{
 
 	int SCREEN_X = 960;
 	int SCREEN_Y = 900;
-	
-	public void setbActivateAction(boolean bActivateAction) {
-		this.bActivateAction = bActivateAction;
-	}
 
 	public void run() {
 		SetupGame set = new SetupGame("Setup Test");

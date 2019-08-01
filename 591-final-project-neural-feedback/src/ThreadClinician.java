@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public class ThreadClinician implements Runnable{
-	@Override
+public class ThreadClinician extends Thread{
+
    public void run(){
 	   	FmriClassification c = new FmriClassification();
 		c.svmClassify();
