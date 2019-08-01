@@ -21,11 +21,11 @@ public class DataProcessor {
 		FmriClassification cl = new FmriClassification();
 		ArrayList<String> actualMoves = cl.getActualMoves();
 		ArrayList<String> predictedMoves = cl.getPredictions();
-		arrayIndex++;
 		if (actualMoves.get(arrayIndex).equals(predictedMoves.get(arrayIndex))){
-			System.out.println(arrayIndex);
+			arrayIndex++;
 			return true;
 		}
+		arrayIndex++;
 		return false;
 	}
 

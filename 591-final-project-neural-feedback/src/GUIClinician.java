@@ -34,7 +34,7 @@ public class GUIClinician {
 		PennDraw.clear(PennDraw.BLACK);
 		PennDraw.setPenColor(PennDraw.WHITE);
 		PennDraw.setFontSize(14);
-		PennDraw.text(0.5, 0.5, "Wait for signal...");
+		PennDraw.text(0.5, 0.5, "Waiting for signal...");
 	}
 
 	public void draw(ArrayList<String> actualMoves, ArrayList<String> predictedMoves) {
