@@ -6,8 +6,8 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 public class FmriClassification {
-	private ArrayList<String> predictions = new ArrayList<String>();
-	private ArrayList<String> actualMoves = new ArrayList<String>();
+	private static ArrayList<String> predictions = new ArrayList<String>();
+	private static ArrayList<String> actualMoves = new ArrayList<String>();
 
 	/**
 	 * Method to get the predictions based on the SVM model. Tested Naive Bayes
@@ -33,29 +33,8 @@ public class FmriClassification {
 				String actualMove = testDataset.classAttribute().value((int) actualIndex);
 				double predIndex = svmModel.classifyInstance(newInstance);
 				String predictedMove = testDataset.classAttribute().value((int) predIndex);
-				
-				if (predictedMove.equals("FingerMovement")) {
-					predictions.add("Finger");
-				} else if (predictedMove.equals("FootMovement")) {
-					predictions.add("Foot");
-				} else if (predictedMove.equals("LipsMovement")) {
-					predictions.add("Lips");
-				} else if (predictedMove.equals("Resting")) {
-					predictions.add("Resting");
-				} 
-				
-				if (actualMove.equals("FingerMovement")) {
-					actualMoves.add("Finger");
-				} else if (actualMove.equals("FootMovement")) {
-					actualMoves.add("Foot");
-				} else if (actualMove.equals("LipsMovement")) {
-					actualMoves.add("Lips");
-				} else if (actualMove.equals("Resting")) {
-					actualMoves.add("Resting");
-				} 
-				
-//				predictions.add(predictedMove);
-//				actualMoves.add(actualMove);
+				predictions.add(predictedMove);
+				actualMoves.add(actualMove);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

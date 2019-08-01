@@ -57,13 +57,13 @@ public class Play extends BasicGameState{
 		if (label.bDraw) {
 			System.out.println(label.ID);
 			switch (label.ID) {
-				case 0:
+				case "Foot":
 					labelFoot.draw(125, (SetupGame.SCREEN_Y - 225));
 					break;
-				case 1:
+				case "Finger":
 					labelFinger.draw(125, (SetupGame.SCREEN_Y - 225));
 					break;
-				case 2:
+				case "Lips":
 					labelLips.draw(125, (SetupGame.SCREEN_Y - 225));
 					break;
 			}
@@ -109,8 +109,9 @@ public class Play extends BasicGameState{
 		//should label be drawn
 		label.bDraw = ip.shouldDrawLabel(currTime);
 		
+		
 		//draw new label
-		label.checkVisible(rand.nextInt(3), currTime);
+		label.checkVisible("Foot", currTime);
 		
 		//move sky
 		sky1.scroll(modSkySpeed);

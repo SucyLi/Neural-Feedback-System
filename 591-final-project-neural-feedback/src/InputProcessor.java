@@ -14,11 +14,6 @@ public class InputProcessor {
 		this.lastInputTime = 0;
 	}
 	
-	public int getInputData() {
-		//TODO should return 0 or 1, failure or success, or be a boolean
-		return 0;
-	}
-	
 	public boolean isInputProcessing(long currentTime) {
 		if (bInputSuccess) {
 			if (currentTime - this.lastInputTime < INPUT_WAIT) {
