@@ -8,9 +8,9 @@ public class Menu extends BasicGameState {
 	 * 
 	 * @param state the integer representing the state of the game
 	 */
-//	public Menu(int state) {
-//		;
-//	}
+	public Menu(int state) {
+		;
+	}
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {

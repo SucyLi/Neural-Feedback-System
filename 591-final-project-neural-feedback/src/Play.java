@@ -32,9 +32,9 @@ public class Play extends BasicGameState {
 	 * 
 	 * @param state the integer representing the state of the game
 	 */
-//	public Play(int state) {
-//		;
-//	}
+	public Play(int state) {
+		;
+	}
 
 	/**
 	 * init class to initialized all objects and parameters needed for render() and

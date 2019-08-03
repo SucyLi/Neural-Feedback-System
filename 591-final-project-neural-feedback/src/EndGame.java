@@ -8,9 +8,9 @@ public class EndGame extends BasicGameState {
 	 * 
 	 * @param state the integer representing the state of the game
 	 */
-//	public EndGame(int state) {
-//		;
-//	}
+	public EndGame(int state) {
+		;
+	}
 	
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {

@@ -19,9 +19,9 @@ public class SetupGame extends StateBasedGame {
 	 */
 	public SetupGame(String gameName) {
 		super(gameName);
-		this.addState(new Menu());
-		this.addState(new Play());
-		this.addState(new EndGame());
+		this.addState(new Menu(MENU));
+		this.addState(new Play(PLAY));
+		this.addState(new EndGame(END_GAME));
 	}
 
 	/**
