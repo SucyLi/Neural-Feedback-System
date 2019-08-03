@@ -10,9 +10,10 @@ public class GUIClinician {
 	boolean startDisplay = false;
 	NiftiVolume volume;
 	String fileName;
-	
+
 	/**
 	 * Clinician GUI constructor that takes dimensions of the data
+	 * 
 	 * @param fn the nii file containing fMRI data
 	 */
 	public GUIClinician(String fn) {
@@ -29,19 +30,25 @@ public class GUIClinician {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * The draw method allows to draw with the Nifti library and Penndraw the brain scans
-	 * in 2D for each move expected (instruction)
+	 * The draw method allows to draw with the Nifti library and Penndraw the brain
+	 * scans in 2D for each move expected (instruction)
 	 * 
-	 * @param actualMoves the arrayList of moves expected (instructions in our game)
-	 * @param predictedMoves the arrayList of predicted moves (actual moves in our game)
+	 * @param actualMoves    the arrayList of moves expected (instructions in our
+	 *                       game)
+	 * @param predictedMoves the arrayList of predicted moves (actual moves in our
+	 *                       game)
 	 */
 	public void draw(ArrayList<String> actualMoves, ArrayList<String> predictedMoves) {
 		PennDraw.enableAnimation(12); // 30 / 2.5
 		for (int t = 0; t < task; t++) {
 			String actualLabel = actualMoves.get(t);
 			String predLabel = predictedMoves.get(t);
+			
+//			long currTime = System.currentTimeMillis();
+//			System.out.println("clinician GUI time: " + currTime);
+
 			for (int z = 0; z < nz; z++) {
 				double slice[][] = new double[nx][ny];
 				double maxIntensity = 0;
@@ -69,7 +76,7 @@ public class GUIClinician {
 					}
 				}
 				PennDraw.setPenColor(PennDraw.WHITE);
-				PennDraw.setFontSize(14);
+				PennDraw.setFontSize(20);
 				PennDraw.text(0.25, 0.94, "Expected: " + actualLabel);
 				// if wrong, red, if correct, green
 				if (actualLabel.equals(predLabel)) {
@@ -77,7 +84,8 @@ public class GUIClinician {
 				} else {
 					PennDraw.setPenColor(PennDraw.BOOK_RED);
 				}
-				PennDraw.setFontSize(14);
+
+				PennDraw.setFontSize(20);
 				PennDraw.text(0.75, 0.94, "Detected: " + predLabel);
 
 				PennDraw.advance();

@@ -3,7 +3,8 @@ import java.util.Random;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.TrueTypeFont;
 import java.awt.Font;
 
@@ -82,12 +83,14 @@ public class Play extends BasicGameState {
 		Image labelFinger = new Image("sprites/label-finger.png");
 		Image labelLips = new Image("sprites/label-lips.png");
 		Image labelRest = new Image("sprites/label-rest.png");
+		
 		// balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
 		imgBalloon.draw(balloon.x, balloon.y, balloon.BALLOON_SCALE);
+		
 		// create labels
-		if ((currTime - lastMoveTime) < 1400) {
+		if ((currTime - label.lastLabelDrawTime) > 1400) {
 			if (label.bDraw) {
 				switch (label.ID) {
 				case "Foot":
@@ -113,7 +116,7 @@ public class Play extends BasicGameState {
 		g.setFont(ttf);
 		
 		// Displays good job if it the player made the right move, wrong move otherwise
-		if ((currTime - lastMoveTime) < 1400) {
+		if ((currTime - lastMoveTime) < 1000) {
 			if (dp.isRightMove()) {
 				g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 			} else if (!dp.isRightMove()) {
@@ -130,49 +133,54 @@ public class Play extends BasicGameState {
 	 * actual moves). If there is no data, player can play by pressing w.
 	 */
 	@Override
-	public void update(GameContainer gc, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
-		ir.updateGameInput(gc.getInput());
-		
-		currTime = System.currentTimeMillis();
-		
-		// process input
-		if (dp.isUsingData()) {
-			while ((currTime - lastMoveTime) > 2432) {
-				lastMoveTime = currTime;
+		actualMovesIndex = dp.getArrayIndex();
+		if (actualMovesIndex < 72) {
+			ir.updateGameInput(gc.getInput());
+			currTime = System.currentTimeMillis();
+			// process input
+			if (dp.isUsingData()) {
+				while ((currTime - lastMoveTime) > 2432) {
+//					System.out.println("GET");
+//					System.out.println("kid GUI time: " + currTime);
 
-				actualMovesIndex = dp.getArrayIndex();				
-				
-				// should label be drawn
-				label.bUpdated = true;
-				label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
-				
-				//get Input from data data
-				ip.updateInputData(dp.getData(), currTime);
+					actualMovesIndex = dp.getArrayIndex();
+					lastMoveTime = currTime;
+					// should label be drawn
+					try {
+//						System.out.println("actualMovesIndex = " + actualMovesIndex);
+//						System.out.println("ID = " + actualMoves.get(actualMovesIndex));
+
+						label.bDraw = true;
+						label.setLabelDrawInfo(actualMoves.get(actualMovesIndex), currTime);
+						
+						ip.updateInputData(dp.getData(), currTime);
+					} catch (IndexOutOfBoundsException e) {
+
+						
+					}
+				}
+			} else {
+				ip.updateInputKeyboard(currTime);
 			}
-		} else {
-			ip.updateInputKeyboard(currTime);
+			// update sky speed
+			int modSkySpeed = 1;
+			if (ip.isInputProcessing(currTime)) {
+				modSkySpeed = 6;
+			}
+			// update balloon elevation
+			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
+				balloon.elevationTimer = currTime;
+				balloon.elevation += 1;
+			}
+			// move sky
+			sky1.scroll(modSkySpeed);
+			sky2.scroll(modSkySpeed);
 		}
-		
-		//draw label for 3 seconds
-		if (label.bUpdated) {
-			label.bDraw = label.shouldDrawLabel(currTime);
+		else if (actualMovesIndex >= 72){
+			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
-		
-		// update sky speed
-		int modSkySpeed = 1;
-		if (ip.isInputProcessing(currTime)) {
-			modSkySpeed = 6;
-		}
-		
-		// update balloon elevation
-		if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
-			balloon.elevationTimer = currTime;
-			balloon.elevation += 1;
-		}
-		// move sky
-		sky1.scroll(modSkySpeed);
-		sky2.scroll(modSkySpeed);
 	}
 
 	@Override
