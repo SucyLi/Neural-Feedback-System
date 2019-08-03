@@ -16,6 +16,7 @@ public class Menu extends BasicGameState{
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
+		
 		g.drawString("PRESS ENTER TO START", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
 	}
 

@@ -1,6 +1,5 @@
 public class GameLauncher {
 	static int milliseconds;
-	static boolean bActivate;
 	
 	public static void main(String[] args) throws InterruptedException{
 //		Thread threadClinician = new ThreadClinician();	

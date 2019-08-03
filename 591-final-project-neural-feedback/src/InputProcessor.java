@@ -47,7 +47,7 @@ public class InputProcessor {
 	}
 	
 	public boolean shouldDrawLabel(long currTime) {
-		if (((currTime - this.lastLabelDrawTime) > LABEL_WAIT) && (!this.bInputSuccess)){
+		if (((currTime - this.lastLabelDrawTime) > LABEL_WAIT) ){
 			return true;
 		}
 		

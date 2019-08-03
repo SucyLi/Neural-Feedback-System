@@ -15,6 +15,8 @@ public class Play extends BasicGameState {
 	// player stats
 	int numSuccess;
 	int numFails;
+	int actualMovesIndex;
+	long lastMoveTime;
 
 	Balloon balloon;
 	Sky sky1;
@@ -30,6 +32,8 @@ public class Play extends BasicGameState {
 
 	FmriClassification cl;
 
+	ArrayList<String> actualMoves;
+	
 	public Play(int state) {
 
 	}
@@ -48,11 +52,16 @@ public class Play extends BasicGameState {
 		sky1 = new Sky(0, (-SetupGame.SKY_DIMENSION_Y + SetupGame.SCREEN_Y));
 		sky2 = new Sky(0, ((-SetupGame.SKY_DIMENSION_Y * 2) + SetupGame.SCREEN_Y));
 		label = new Label();
+		lastMoveTime = 0;
+		
+		actualMoves = new ArrayList<>();
 		
 		//init variables
 		ip.bInputSuccess = false;
 		bUsingData = false;
 		bDrawLabel = false;
+		actualMoves = cl.getActualMoves();
+		actualMovesIndex = 0;
 		Font font = new Font("Helvetica", Font.BOLD, 30);
 		ttf = new TrueTypeFont(font, true); 
 	}
@@ -67,13 +76,16 @@ public class Play extends BasicGameState {
 		Image labelFoot = new Image("sprites/label-foot.png");
 		Image labelFinger = new Image("sprites/label-finger.png");
 		Image labelLips = new Image("sprites/label-lips.png");
-
+		Image labelRest = new Image("sprites/label-rest.png");
+		
+		//balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
 		imgBalloon.draw(balloon.x, balloon.y, balloon.BALLOON_SCALE);
 		
+		//create labels
 		if (label.bDraw) {
-			System.out.println(label.ID);
+//			System.out.println(label.ID);
 			switch (label.ID) {
 			case "Foot":
 				labelFoot.draw(125, (SetupGame.SCREEN_Y - 225));
@@ -84,6 +96,9 @@ public class Play extends BasicGameState {
 			case "Lips":
 				labelLips.draw(125, (SetupGame.SCREEN_Y - 225));
 				break;
+			case "Resting":
+				labelRest.draw(125, (SetupGame.SCREEN_Y - 225));
+				break;
 			}
 
 			label.bVisible = true;
@@ -91,6 +106,7 @@ public class Play extends BasicGameState {
 			label.bVisible = false;
 		}
 		
+		//write text
 		g.setFont(ttf);
 		
 		if (dp.isRightMove()) {
@@ -103,41 +119,32 @@ public class Play extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame arg1, int arg2) throws SlickException {
-		ArrayList<String> actualMoves = cl.getActualMoves();
-		int index = dp.getArrayIndex();
-
-		long currTime = System.currentTimeMillis();
-
-		int modSkySpeed = 1;
-		
 		ir.updateGameInput(gc.getInput());
-
+		long currTime = System.currentTimeMillis();
+			
 		// process input
 		if (dp.isUsingData()) {
-			label.bDraw = ip.shouldDrawLabel(currTime);
-			label.checkVisible(actualMoves.get(index), currTime);
-			// should label be drawn
-			if (label.bDraw) {
-				// draw new label
+			while ((currTime - lastMoveTime) > 2432) {
+				System.out.println("GET");
+				actualMovesIndex = dp.getArrayIndex();
+				lastMoveTime = currTime;
+				System.out.println("actualMovesIndex = " + actualMovesIndex);
+				System.out.println("ID = " + actualMoves.get(actualMovesIndex));
+				// should label be drawn
+				label.bDraw = ip.shouldDrawLabel(currTime);
+				label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
 				ip.updateInputData(dp.getData(), currTime);
 			}
 		} else {
 			ip.updateInputKeyboard(currTime);
 		}
 
+		//update sky speed
+		int modSkySpeed = 1;
 		if (ip.isInputProcessing(currTime)) {
 			modSkySpeed = 6;
 		}
 		
-		
-		try {
-			Thread.sleep(800);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		}
-
 		// update balloon elevation
 		if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 			balloon.elevationTimer = currTime;
