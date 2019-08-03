@@ -26,6 +26,7 @@ public class FmriClassification {
 		Instances testDataset = classification.getTestData();
 		// build SVM model
 		Classifier svmModel = classification.buildSVMClassifier(trainingDataset);
+		classification.modelEvaluation(svmModel, trainingDataset, testDataset);
 		for (int i = 0; i < testDataset.numInstances(); i++) {
 			Instance newInstance = testDataset.instance(i);
 			try {
@@ -65,10 +66,25 @@ public class FmriClassification {
 		}
 	}
 
+	/**
+	 * 
+	 * @return arrayList containing all predictions made by SVM model. We use these
+	 *         predictions as a proxy for the actual moves made my the kid. We thus
+	 *         expect the kid to follow instructions 93% of the time (i.e. accuracy
+	 *         of the model)
+	 */
 	public ArrayList<String> getPredictions() {
 		return predictions;
 	}
 
+	/**
+	 * 
+	 * @return arrayList containing all actual moves expected from data. We will use
+	 *         these moves as instructions in the game since we do not have a real
+	 *         kid and brain sensors performing movements. The game will essentially
+	 *         compare instruction (actual move in our simulation) and actual move
+	 *         (predicted move in our simulation)
+	 */
 	public ArrayList<String> getActualMoves() {
 		return actualMoves;
 	}

@@ -57,8 +57,8 @@ public class FmriClassificationModel {
 	 * Evaluates worth of a subset of attributes by considering individual
 	 * predictive ability and level of redundancy between them. Search backwards and
 	 * delete attributes until evaluation decreases. Will not be used in this case
-	 * as the number of attributes (over 14k) is too great and the running time is
-	 * too long but might be used for future datasets
+	 * as the number of attributes (over 140k) is too great and the running time is
+	 * too long but might be used for future data sets
 	 * 
 	 * @param trainingDataset the training data set
 	 * @return the new instances with the applied filter
@@ -183,4 +183,3 @@ public class FmriClassificationModel {
 		}
 	}
 }
-
