@@ -7,9 +7,10 @@ public class SetupGame extends StateBasedGame {
 	public static int SCREEN_Y = 900;
 	final static int SKY_DIMENSION_Y = 2085;
 
-	public static final String title = "Neural Network Motor Game";
-	public static final int menu = 0;
-	public static final int play = 1;
+	public static final String TITLE = "Neural Network Motor Game";
+	public static final int MENU = 0;
+	public static final int PLAY = 1;
+	public static final int END_GAME = 2;
 
 	/**
 	 * Setup game constructor
@@ -18,8 +19,9 @@ public class SetupGame extends StateBasedGame {
 	 */
 	public SetupGame(String gameName) {
 		super(gameName);
-		this.addState(new Menu(menu));
-		this.addState(new Play(play));
+		this.addState(new Menu());
+		this.addState(new Play());
+		this.addState(new EndGame());
 	}
 
 	/**
@@ -28,8 +30,9 @@ public class SetupGame extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		// TODO Auto-generated method stub
-		this.getState(menu).init(gc, this);
-		this.getState(play).init(gc, this);
-		this.enterState(menu);
+		this.getState(MENU).init(gc, this);
+		this.getState(PLAY).init(gc, this);
+		this.getState(END_GAME).init(gc, this);
+		this.enterState(MENU);
 	}
 }

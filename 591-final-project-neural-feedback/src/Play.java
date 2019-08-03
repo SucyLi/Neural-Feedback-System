@@ -3,7 +3,8 @@ import java.util.Random;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.TrueTypeFont;
 import java.awt.Font;
 
@@ -31,9 +32,9 @@ public class Play extends BasicGameState {
 	 * 
 	 * @param state the integer representing the state of the game
 	 */
-	public Play(int state) {
-		;
-	}
+//	public Play(int state) {
+//		;
+//	}
 
 	/**
 	 * init class to initialized all objects and parameters needed for render() and
@@ -120,39 +121,44 @@ public class Play extends BasicGameState {
 	 * actual moves). If there is no data, player can play by pressing w.
 	 */
 	@Override
-	public void update(GameContainer gc, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
-		ir.updateGameInput(gc.getInput());
-		long currTime = System.currentTimeMillis();
-		// process input
-		if (dp.isUsingData()) {
-			while ((currTime - lastMoveTime) > 2432) {
-				System.out.println("GET");
-				actualMovesIndex = dp.getArrayIndex();
-				lastMoveTime = currTime;
-				System.out.println("actualMovesIndex = " + actualMovesIndex);
-				System.out.println("ID = " + actualMoves.get(actualMovesIndex));
-				// should label be drawn
-				label.bDraw = ip.shouldDrawLabel(currTime);
-				label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
-				ip.updateInputData(dp.getData(), currTime);
+		actualMovesIndex = dp.getArrayIndex();
+		if (actualMovesIndex < 72) {
+			ir.updateGameInput(gc.getInput());
+			long currTime = System.currentTimeMillis();
+			// process input
+			if (dp.isUsingData()) {
+				while ((currTime - lastMoveTime) > 2432) {
+					System.out.println("GET");
+					lastMoveTime = currTime;
+					System.out.println("actualMovesIndex = " + actualMovesIndex);
+					System.out.println("ID = " + actualMoves.get(actualMovesIndex));
+					// should label be drawn
+					label.bDraw = ip.shouldDrawLabel(currTime);
+					label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
+					ip.updateInputData(dp.getData(), currTime);
+				}
+			} else {
+				ip.updateInputKeyboard(currTime);
 			}
-		} else {
-			ip.updateInputKeyboard(currTime);
+			// update sky speed
+			int modSkySpeed = 1;
+			if (ip.isInputProcessing(currTime)) {
+				modSkySpeed = 6;
+			}
+			// update balloon elevation
+			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
+				balloon.elevationTimer = currTime;
+				balloon.elevation += 1;
+			}
+			// move sky
+			sky1.scroll(modSkySpeed);
+			sky2.scroll(modSkySpeed);
 		}
-		// update sky speed
-		int modSkySpeed = 1;
-		if (ip.isInputProcessing(currTime)) {
-			modSkySpeed = 6;
+		else if (actualMovesIndex >= 72){
+			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
-		// update balloon elevation
-		if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
-			balloon.elevationTimer = currTime;
-			balloon.elevation += 1;
-		}
-		// move sky
-		sky1.scroll(modSkySpeed);
-		sky2.scroll(modSkySpeed);
 	}
 
 	@Override

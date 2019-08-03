@@ -11,7 +11,7 @@ public class ThreadGame extends Thread {
 	 * part will launch the game GUI
 	 */
 	public void run() {
-		SetupGame set = new SetupGame("Setup Test");
+		SetupGame set = new SetupGame(SetupGame.TITLE);
 		AppGameContainer app;
 		try {
 			app = new AppGameContainer(set);
