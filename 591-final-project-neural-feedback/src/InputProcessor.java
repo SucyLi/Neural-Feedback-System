@@ -1,7 +1,6 @@
 
 public class InputProcessor {
-	final int INPUT_WAIT = 3000;
-	final int LABEL_WAIT = INPUT_WAIT * 2;
+	final int INPUT_WAIT = 2000;
 	int lastLabelDrawTime = 0;
 	boolean bInputSuccess = false;
 	long lastInputTime = 0;
@@ -67,20 +66,5 @@ public class InputProcessor {
 		if (b) {
 			updateInputChecks(currTime);
 		}
-	}
-
-	/**
-	 * Check to see if a label should be drawn by comparing the time of the last
-	 * label to the current time. If is higher than 6000ms, then draw label.
-	 * 
-	 * @param currTime the current time in milliseconds recorded by the system
-	 * @return true if a label should be drawn, false otherwise
-	 */
-	public boolean shouldDrawLabel(long currTime) {
-		if (((currTime - this.lastLabelDrawTime) > LABEL_WAIT)) {
-			return true;
-		}
-
-		return false;
 	}
 }

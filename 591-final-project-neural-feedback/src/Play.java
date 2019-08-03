@@ -14,6 +14,7 @@ public class Play extends BasicGameState {
 	int numFails;
 	int actualMovesIndex;
 	long lastMoveTime;
+	long currTime;
 	Balloon balloon;
 	Sky sky1;
 	Sky sky2;
@@ -54,10 +55,12 @@ public class Play extends BasicGameState {
 		label = new Label();
 		lastMoveTime = 0;
 		actualMoves = new ArrayList<>();
+		
 		// init variables
 		ip.bInputSuccess = false;
 		bUsingData = false;
 		bDrawLabel = false;
+		
 		actualMoves = cl.getActualMoves();
 		actualMovesIndex = 0;
 		Font font = new Font("Helvetica", Font.BOLD, 30);
@@ -84,33 +87,40 @@ public class Play extends BasicGameState {
 		imgSky2.draw(sky2.x, sky2.y);
 		imgBalloon.draw(balloon.x, balloon.y, balloon.BALLOON_SCALE);
 		// create labels
-		if (label.bDraw) {
-			switch (label.ID) {
-			case "Foot":
-				labelFoot.draw(125, (SetupGame.SCREEN_Y - 225));
-				break;
-			case "Finger":
-				labelFinger.draw(125, (SetupGame.SCREEN_Y - 225));
-				break;
-			case "Lips":
-				labelLips.draw(125, (SetupGame.SCREEN_Y - 225));
-				break;
-			case "Resting":
-				labelRest.draw(125, (SetupGame.SCREEN_Y - 225));
-				break;
+		if ((currTime - lastMoveTime) < 1400) {
+			if (label.bDraw) {
+				switch (label.ID) {
+				case "Foot":
+					labelFoot.draw(125, (SetupGame.SCREEN_Y - 225));
+					break;
+				case "Finger":
+					labelFinger.draw(125, (SetupGame.SCREEN_Y - 225));
+					break;
+				case "Lips":
+					labelLips.draw(125, (SetupGame.SCREEN_Y - 225));
+					break;
+				case "Resting":
+					labelRest.draw(125, (SetupGame.SCREEN_Y - 225));
+					break;
+				}
+				label.bVisible = true;
+			} else {
+				label.bVisible = false;
 			}
-			label.bVisible = true;
-		} else {
-			label.bVisible = false;
 		}
+		
 		// write text
 		g.setFont(ttf);
+		
 		// Displays good job if it the player made the right move, wrong move otherwise
-		if (dp.isRightMove()) {
-			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
-		} else if (!dp.isRightMove()) {
-			g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
+		if ((currTime - lastMoveTime) < 1400) {
+			if (dp.isRightMove()) {
+				g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
+			} else if (!dp.isRightMove()) {
+				g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
+			}
 		}
+	
 		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
 	}
 
@@ -123,28 +133,38 @@ public class Play extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame arg1, int arg2) throws SlickException {
 		// input reader class used here in case of no data
 		ir.updateGameInput(gc.getInput());
-		long currTime = System.currentTimeMillis();
+		
+		currTime = System.currentTimeMillis();
+		
 		// process input
 		if (dp.isUsingData()) {
 			while ((currTime - lastMoveTime) > 2432) {
-				System.out.println("GET");
-				actualMovesIndex = dp.getArrayIndex();
 				lastMoveTime = currTime;
-				System.out.println("actualMovesIndex = " + actualMovesIndex);
-				System.out.println("ID = " + actualMoves.get(actualMovesIndex));
+
+				actualMovesIndex = dp.getArrayIndex();				
+				
 				// should label be drawn
-				label.bDraw = ip.shouldDrawLabel(currTime);
+				label.bUpdated = true;
 				label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
+				
+				//get Input from data data
 				ip.updateInputData(dp.getData(), currTime);
 			}
 		} else {
 			ip.updateInputKeyboard(currTime);
 		}
+		
+		//draw label for 3 seconds
+		if (label.bUpdated) {
+			label.bDraw = label.shouldDrawLabel(currTime);
+		}
+		
 		// update sky speed
 		int modSkySpeed = 1;
 		if (ip.isInputProcessing(currTime)) {
 			modSkySpeed = 6;
 		}
+		
 		// update balloon elevation
 		if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 			balloon.elevationTimer = currTime;
