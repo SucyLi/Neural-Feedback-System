@@ -34,11 +34,16 @@ public class DataProcessor {
 		FmriClassification cl = new FmriClassification();
 		ArrayList<String> actualMoves = cl.getActualMoves();
 		ArrayList<String> predictedMoves = cl.getPredictions();
-		if (actualMoves.get(arrayIndex).equals(predictedMoves.get(arrayIndex))) {
-			arrayIndex++;
-			rightMove = true;
-			return true;
+		try {
+			if (actualMoves.get(arrayIndex).equals(predictedMoves.get(arrayIndex))) {
+				arrayIndex++;
+				rightMove = true;
+				return true;
+			}
+		} catch (IndexOutOfBoundsException e) {
+
 		}
+
 		arrayIndex++;
 		rightMove = false;
 		return false;

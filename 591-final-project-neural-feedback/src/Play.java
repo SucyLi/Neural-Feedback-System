@@ -107,10 +107,11 @@ public class Play extends BasicGameState {
 		// write text
 		g.setFont(ttf);
 		// Displays good job if it the player made the right move, wrong move otherwise
+
 		if (dp.isRightMove()) {
-			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
+			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 		} else if (!dp.isRightMove()) {
-			g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
+			g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 		}
 		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
 	}
@@ -130,14 +131,23 @@ public class Play extends BasicGameState {
 			// process input
 			if (dp.isUsingData()) {
 				while ((currTime - lastMoveTime) > 2432) {
-					System.out.println("GET");
+//					System.out.println("GET");
+//					System.out.println("kid GUI time: " + currTime);
+
+					actualMovesIndex = dp.getArrayIndex();
 					lastMoveTime = currTime;
-					System.out.println("actualMovesIndex = " + actualMovesIndex);
-					System.out.println("ID = " + actualMoves.get(actualMovesIndex));
 					// should label be drawn
-					label.bDraw = ip.shouldDrawLabel(currTime);
-					label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
-					ip.updateInputData(dp.getData(), currTime);
+					try {
+						System.out.println("actualMovesIndex = " + actualMovesIndex);
+						System.out.println("ID = " + actualMoves.get(actualMovesIndex));
+
+						label.bDraw = ip.shouldDrawLabel(currTime);
+						label.checkVisible(actualMoves.get(actualMovesIndex), currTime);
+						ip.updateInputData(dp.getData(), currTime);
+					} catch (IndexOutOfBoundsException e) {
+
+						
+					}
 				}
 			} else {
 				ip.updateInputKeyboard(currTime);
