@@ -33,8 +33,8 @@ public class InputProcessor {
 	}
 	
 	//checks for keyboard input
-	public void updateInputKeyboard(Input input, long currTime) {
-		if (input.isKeyDown(Input.KEY_W) && (!this.bInputSuccess)) {
+	public void updateInputKeyboard(long currTime) {
+		if ((InputReader.isbPressedW()) && (!this.bInputSuccess)) {
 			updateInputChecks(currTime);
 		}
 	}

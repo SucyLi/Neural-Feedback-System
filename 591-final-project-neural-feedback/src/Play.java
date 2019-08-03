@@ -4,6 +4,10 @@ import java.util.Random;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import org.newdawn.slick.TrueTypeFont;
+import java.awt.Font;
+
+
 public class Play extends BasicGameState {
 	boolean bUsingData;
 	boolean bDrawLabel;
@@ -20,6 +24,9 @@ public class Play extends BasicGameState {
 
 	DataProcessor dp;
 	InputProcessor ip;
+	InputReader ir;
+	
+	TrueTypeFont ttf;
 
 	FmriClassification cl;
 
@@ -29,18 +36,25 @@ public class Play extends BasicGameState {
 
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
-		// TODO Auto-generated method stub
+		//processor classes
 		rand = new Random();
 		dp = new DataProcessor();
 		ip = new InputProcessor();
+		ir = new InputReader();
 		cl = new FmriClassification();
+		
+		//sprite classes
 		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2);
 		sky1 = new Sky(0, (-SetupGame.SKY_DIMENSION_Y + SetupGame.SCREEN_Y));
 		sky2 = new Sky(0, ((-SetupGame.SKY_DIMENSION_Y * 2) + SetupGame.SCREEN_Y));
 		label = new Label();
+		
+		//init variables
 		ip.bInputSuccess = false;
 		bUsingData = false;
 		bDrawLabel = false;
+		Font font = new Font("Helvetica", Font.BOLD, 30);
+		ttf = new TrueTypeFont(font, true); 
 	}
 
 	@Override
@@ -57,7 +71,7 @@ public class Play extends BasicGameState {
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
 		imgBalloon.draw(balloon.x, balloon.y, balloon.BALLOON_SCALE);
-
+		
 		if (label.bDraw) {
 			System.out.println(label.ID);
 			switch (label.ID) {
@@ -73,16 +87,17 @@ public class Play extends BasicGameState {
 			}
 
 			label.bVisible = true;
-
 		} else {
 			label.bVisible = false;
 		}
-
+		
+		g.setFont(ttf);
+		
 		if (dp.isRightMove()) {
 			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
 		}
 
-		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 150, 0);
+		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
 
 	}
 
@@ -91,10 +106,11 @@ public class Play extends BasicGameState {
 		ArrayList<String> actualMoves = cl.getActualMoves();
 		int index = dp.getArrayIndex();
 
-		// TODO Auto-generated method stub
 		long currTime = System.currentTimeMillis();
 
 		int modSkySpeed = 1;
+		
+		ir.updateGameInput(gc.getInput());
 
 		// process input
 		if (dp.isUsingData()) {
@@ -106,7 +122,7 @@ public class Play extends BasicGameState {
 				ip.updateInputData(dp.getData(), currTime);
 			}
 		} else {
-			ip.updateInputKeyboard(gc.getInput(), currTime);
+			ip.updateInputKeyboard(currTime);
 		}
 
 		if (ip.isInputProcessing(currTime)) {
