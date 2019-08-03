@@ -22,8 +22,11 @@ public class Menu extends BasicGameState {
 	 */
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		g.drawString("PRESS ENTER TO START", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
+		g.drawString("Motor Game Instruction", (SetupGame.SCREEN_X / 2 - 70), (SetupGame.SCREEN_Y / 2 - 200));
+		g.drawString("Please follow the movement instruction on the screen and take corresponding movement.", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 150));
+		g.drawString("If you perform the movement correctly, a balloon will go up. Try your best to keep ", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 100));
+		g.drawString("the balloon going up!", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 50));
+		g.drawString("Ready? Press ENTER to start.", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2));
 	}
 
 	/**
@@ -39,7 +42,7 @@ public class Menu extends BasicGameState {
 			Thread threadClinician = new ThreadClinician();
 			threadClinician.start();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(4000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

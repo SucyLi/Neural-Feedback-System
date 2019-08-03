@@ -107,9 +107,9 @@ public class Play extends BasicGameState {
 		g.setFont(ttf);
 		// Displays good job if it the player made the right move, wrong move otherwise
 		if (dp.isRightMove()) {
-			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
+			g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 		} else if (!dp.isRightMove()) {
-			g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 20));
+			g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 		}
 		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
 	}
