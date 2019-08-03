@@ -23,7 +23,7 @@ public class Label {
 	 * @param labelID the label to draw (foot, rest, lips, finger)
 	 * @param currTime the current time in milliseconds recorded by the system
 	 */
-	public void checkVisible(String labelID, long currTime) {
+	public void setLabelDrawInfo(String labelID, long currTime) {
 		if (this.bDraw) {
 			this.lastLabelDrawTime = currTime;
 			this.ID = labelID;
