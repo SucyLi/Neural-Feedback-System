@@ -42,12 +42,17 @@ public class Menu extends BasicGameState {
 			Thread threadClinician = new ThreadClinician();
 			threadClinician.start();
 			try {
-				Thread.sleep(4000);
+				Thread.sleep(3500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			sbg.enterState(1);
+			
+//			long currTime = System.currentTimeMillis();
+//			System.out.println("kid GUI start time: " + currTime);
+
 		}
 	}
 
