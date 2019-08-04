@@ -1,6 +1,8 @@
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 import weka.classifiers.Classifier;
 import weka.core.Instance;
@@ -144,5 +146,61 @@ public class ProjectJUnitTest {
 		
 		assertTrue(Math.abs(s.getY() - 0.3) <= 1E-6);
 	}
-
+	
+	/**
+	 * Tests sky speed modifier
+	 */
+	@Test
+	void skySpeedMod() {
+		assertEquals(6, Sky.getModSkySpeed(true));
+		assertEquals(1, Sky.getModSkySpeed(false));
+	}
+	/**
+	 * Tests file loading
+	 */
+	@Test
+	void testUsingData() {
+		DataProcessor dp = new DataProcessor();
+		assertTrue(dp.isUsingData());
+	}
+	
+	/**
+	 * Tests input data detection
+	 */
+	@Test
+	void testGameInputUpdate() {
+		InputProcessor ip = new InputProcessor();
+		ip.updateInputData(true, 1000);
+		assertTrue(ip.bInputSuccess);
+		assertEquals(1000, ip.lastInputTime);
+		assertTrue(ip.isInputProcessing(1005));
+	}
+	
+	/**
+	 * Tests whether label should be drawn
+	 */
+	@Test
+	void testLabelCheck() {
+		Label label = new Label();
+		label.lastLabelDrawTime = 0;
+		assertTrue(label.shouldDrawLabel(4000));
+		assertTrue(!label.shouldDrawLabel(1));
+	}
+	
+	/**
+	 * Tests setting of label info
+	 */
+	@Test
+	void testLabelInfo() {
+		Label label = new Label();
+		label.bDraw = false;
+		label.setLabelDrawInfo("Foot", 1000);
+		assertEquals("Resting", label.ID);
+		assertEquals(0, label.lastLabelDrawTime);
+		
+		label.bDraw = true;
+		label.setLabelDrawInfo("Foot", 1000);
+		assertEquals("Foot", label.ID);
+		assertEquals(1000, label.lastLabelDrawTime);
+	}
 }

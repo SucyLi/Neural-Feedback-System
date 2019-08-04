@@ -122,6 +122,7 @@ public class Play extends BasicGameState {
 		if (actualMovesIndex < 72) {
 			ir.updateGameInput(gc.getInput());
 			currTime = System.currentTimeMillis();
+			
 			// process input
 			if (dp.isUsingData()) {
 				while ((currTime - lastMoveTime) > 2500) {
@@ -139,19 +140,18 @@ public class Play extends BasicGameState {
 						System.out.println("Play.update IndexOutOfBoundsException");
 					}
 				}
-			} else {
-				ip.updateInputKeyboard(currTime);
 			}
+			
 			// update sky speed
-			int modSkySpeed = 1;
-			if (ip.isInputProcessing(currTime)) {
-				modSkySpeed = 6;
-			}
+			int modSkySpeed = Sky.getModSkySpeed(ip.isInputProcessing(currTime));
+			
+			
 			// update balloon elevation
 			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 				balloon.elevationTimer = currTime;
 				balloon.elevation += 1;
 			}
+			
 			// move sky
 			sky1.scroll(modSkySpeed);
 			sky2.scroll(modSkySpeed);

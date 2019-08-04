@@ -1,6 +1,6 @@
 
 public class InputProcessor {
-	final int INPUT_WAIT = 1000;
+	static final int INPUT_WAIT = 1000;
 	int lastLabelDrawTime = 0;
 	boolean bInputSuccess = false;
 	long lastInputTime = 0;
@@ -40,18 +40,6 @@ public class InputProcessor {
 	public void updateInputChecks(long currTime) {
 		this.bInputSuccess = true;
 		this.lastInputTime = currTime;
-	}
-
-	/**
-	 * Update input checks if there is no data. Meaning, when there is no data and
-	 * the user is playing the game using the "w" key
-	 * 
-	 * @param currTime
-	 */
-	public void updateInputKeyboard(long currTime) {
-		if ((InputReader.isbPressedW()) && (!this.bInputSuccess)) {
-			updateInputChecks(currTime);
-		}
 	}
 
 	/**

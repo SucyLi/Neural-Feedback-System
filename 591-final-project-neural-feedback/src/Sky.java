@@ -15,15 +15,6 @@ public class Sky {
 		this.x = x;
 		this.y = y;
 	}
-	
-
-	/**
-	 * @return the x
-	 */
-	public float getX() {
-		return x;
-	}
-
 
 	/**
 	 * @return the y
@@ -31,7 +22,17 @@ public class Sky {
 	public float getY() {
 		return y;
 	}
-
+	
+	/**
+	 * Scrolling speeds up when input has been detected
+	 */
+	public static int getModSkySpeed(boolean bIsInputProcessing) {
+		if (bIsInputProcessing) {
+			return 6;
+		}
+		
+		return 1;
+	}
 
 	/**
 	 * Method to make sky move in the background

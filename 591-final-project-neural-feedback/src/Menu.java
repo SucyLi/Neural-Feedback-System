@@ -57,7 +57,7 @@ public class Menu extends BasicGameState {
 			screenStartTitle.draw(275, 400);
 		}
 	}
-
+	
 	/**
 	 * Method to update the game menu. If "Enter" is pressed, then the Clinician GUI
 	 * is launched with a pause allowing it to load and we go to the state number 1
@@ -68,11 +68,7 @@ public class Menu extends BasicGameState {
 
 		// update balloon position
 		for (int i = 0; i < NUM_BALLOONS; i++) {
-			balloons[i].y -= balloons[i].speed;
-			if (balloons[i].y < -250) {
-				balloons[i].y = SetupGame.SCREEN_Y;
-			}
-			balloons[i].img.draw(balloons[i].x, balloons[i].y);
+			Balloon.updatePosition(balloons[i]);
 		}
 
 		Input input = gc.getInput();
