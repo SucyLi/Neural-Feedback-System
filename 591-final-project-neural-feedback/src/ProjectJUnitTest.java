@@ -133,6 +133,28 @@ public class ProjectJUnitTest {
 		int t = clinician.getTask();
 		assertEquals(t, 72);
 	}
+	
+	/**
+	 * Tests normalization method in GUIClinician
+	 */
+	@Test
+	void testNormalization() {
+		GUIClinician clinician = new GUIClinician("fMRI_test.nii");
+		int nx = clinician.getNx();
+		int ny = clinician.getNy();
+		double slice[][] = clinician.convertIntensityToPixelValue(nx, ny, 1, 1);
+		double max = 255;
+		
+		for (int x = 0; x < nx; x++) {
+			for (int y = 0; y < ny; y++) {
+				if (slice[x][y] > max)
+					max = slice[x][y];
+			}
+		}
+		
+		assertTrue(Math.abs(max - 255) <= 1E-6);
+		
+	}
 
 	/**
 	 * Tests sky speed
