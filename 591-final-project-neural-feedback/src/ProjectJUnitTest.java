@@ -189,11 +189,11 @@ public class ProjectJUnitTest {
 	 */
 	@Test
 	void testGameInputUpdate() {
-		InputProcessor ip = new InputProcessor();
-		ip.updateInputData(true, 1000);
-		assertTrue(ip.bInputSuccess);
-		assertEquals(1000, ip.lastInputTime);
-		assertTrue(ip.isInputProcessing(1005));
+		DataProcessor dp = new DataProcessor();
+		dp.updateInputData(true, 1000);
+		assertTrue(dp.bInputSuccess);
+		assertEquals(1000, dp.lastInputTime);
+		assertTrue(dp.isInputProcessing(1005));
 	}
 	
 	/**

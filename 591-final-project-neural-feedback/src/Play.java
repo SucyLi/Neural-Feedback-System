@@ -22,8 +22,6 @@ public class Play extends BasicGameState {
 	Label label;
 	Random rand;
 	DataProcessor dp;
-	InputProcessor ip;
-	InputReader ir;
 	TrueTypeFont ttf;
 	FMRIClassification cl;
 	ArrayList<String> actualMoves;
@@ -46,8 +44,6 @@ public class Play extends BasicGameState {
 		// processor classes
 		rand = new Random();
 		dp = new DataProcessor();
-		ip = new InputProcessor();
-		ir = new InputReader();
 		cl = new FMRIClassification();
 		// sprite classes
 		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2, 0.3f, 0.5f, new Image("sprites/balloon-3.png"));
@@ -58,7 +54,7 @@ public class Play extends BasicGameState {
 		actualMoves = new ArrayList<>();
 		
 		// init variables
-		ip.bInputSuccess = false;
+		dp.bInputSuccess = false;
 		bUsingData = false;
 		bDrawLabel = false;
 		
@@ -121,14 +117,13 @@ public class Play extends BasicGameState {
 		actualMovesIndex = dp.getArrayIndex();
 		while (!GUIClinician.clinicianLoadSuccess) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		if (actualMovesIndex < 72) {
-			ir.updateGameInput(gc.getInput());
 			currTime = System.currentTimeMillis();
 			// process input
 			if (dp.isUsingData()) {
@@ -138,7 +133,7 @@ public class Play extends BasicGameState {
 					try {
 						label.bDraw = true;
 						label.setLabelDrawInfo(actualMoves.get(actualMovesIndex), currTime);
-						ip.updateInputData(dp.getData(), currTime);
+						dp.updateInputData(dp.getData(), currTime);
 					} catch (IndexOutOfBoundsException e) {
 						System.out.println("Play.update IndexOutOfBoundsException");
 					}
@@ -152,7 +147,7 @@ public class Play extends BasicGameState {
 				}
 			}
 			// update sky speed
-			int modSkySpeed = Sky.getModSkySpeed(ip.isInputProcessing(currTime));
+			int modSkySpeed = Sky.getModSkySpeed(dp.isInputProcessing(currTime));
 			// update balloon elevation
 			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 				balloon.elevationTimer = currTime;
