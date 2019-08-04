@@ -73,6 +73,40 @@ public class GUIClinician {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * The convertIntensityToPixelValue method is to convert intensities in fMRI raw
+	 * data to gray scale values
+	 * 
+	 * @param nx
+	 * @param ny
+	 * @param z
+	 * @param t
+	 * @return normalized 2D slice
+	 */
+	public double[][] convertIntensityToPixelValue(int nx, int ny, int z, int t) {
+
+		double slice[][] = new double[nx][ny];
+		double maxIntensity = 0;
+
+		// Calculate maximum intensity
+		for (int x = 0; x < nx; x++) {
+			for (int y = 0; y < ny; y++) {
+				slice[x][y] = volume.data.get(x, y, z, t);
+				if (slice[x][y] > maxIntensity) {
+					maxIntensity = slice[x][y];
+				}
+			}
+		}
+
+		// Normalize data to gray scale
+		for (int x = 0; x < nx; x++) {
+			for (int y = 0; y < ny; y++) {
+				slice[x][y] = slice[x][y] / maxIntensity * 255;
+			}
+		}
+		return slice;
+	}
 
 	/**
 	 * The draw method allows to draw with the Nifti library and Penndraw the brain
@@ -90,22 +124,9 @@ public class GUIClinician {
 			String actualLabel = actualMoves.get(t);
 			String predLabel = predictedMoves.get(t);
 			for (int z = 0; z < nz; z++) {
-				double slice[][] = new double[nx][ny];
-				double maxIntensity = 0;
-				for (int x = 0; x < nx; x++) {
-					for (int y = 0; y < ny; y++) {
-						slice[x][y] = volume.data.get(x, y, z, t);
-						if (slice[x][y] > maxIntensity) {
-							maxIntensity = slice[x][y];
-						}
-					}
-				}
-				// Normalize data to gray scale
-				for (int x = 0; x < nx; x++) {
-					for (int y = 0; y < ny; y++) {
-						slice[x][y] = slice[x][y] / maxIntensity * 255;
-					}
-				}
+				
+				double slice[][] = convertIntensityToPixelValue(nx, ny, z, t);
+				
 				for (int i = 0; i < nx; i++) {
 					for (int j = 0; j < ny; j++) {
 						int pixelValue = (int) slice[i][j];
