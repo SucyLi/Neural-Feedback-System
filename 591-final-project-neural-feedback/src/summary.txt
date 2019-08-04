@@ -24,17 +24,11 @@ MACHINE LEARNING GUI
 Improved Brain Imaging:
 Use more data to have a less blurry view of the brain scans.
 
-More Data Sets:
-Use another data set for our simulation instead of our test data set which we already used to test our models
-
-Backup:
-Add a complete backup in case the game cannot read the data (meaning we press w to play) and more functionalities
-
 Preprocessing: 
 Add extraction code to extract features from raw NIfTI fMRI data
 
 Machine Learning Improvements: 
-1) train classifier with more data, tune parameters to improve test accuracy 2) try advanced classifiers like CNN+RNN
+1) train classifier with more data, tune parameters to improve test accuracy 2) try advanced classifiers like CNN+RNN 3) Use another data set for our simulation instead of our test data set which we already used to test our models
 
 Clinician GUI: 
 except showing axial scans, also offer sagittal and coronal view
