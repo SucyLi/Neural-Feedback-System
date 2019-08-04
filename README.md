@@ -94,8 +94,8 @@ GUIClinician class is designed to show fMRI brain scans to clinicians. First fMR
 The Game GUI takes in instructions (the expected moves from the data) and show them on the screen for the player to see. If the kid has followed the instruction (meaning that the predicted move equals the expected move) then the balloon goes up. The game ends after 36 tasks and shows the accuracy of the kid's moves. The 36 tasks are the last 36 tasks of the test data set, this was to reduce the running time of the simulated game.
 
 ## Classes and methods
-### Classifier
-#### FMRIClassificationModel.java
+### Machine Learning Classifier
+#### FMRIClassificationModel
 getTrainingData(): read preprocessed fMRI training data csv file
 
 getTestData(): read preprocessed fMRI test data csv file
@@ -112,7 +112,7 @@ combineModels(): combine models using AdaBoostM1. Boost a weak classifier by run
 
 modelEvaluation(): evaluate model performance. Return statistics showing the performance of the model used
 
-#### FMRIClassifification.java
+#### FMRIClassifification
 svmClassify(): load training and test datasets, then implements classifier with highest accuracy on test set and get classification results on test set which are then stored in an array list.
 
 printToText(): prints to Labels.txt all expected moves and predicted moves
@@ -124,6 +124,9 @@ convertIntensityToPixelValue(): Method to convert intensities in fMRI raw data t
 draw(): The draw method allows to draw with the Nifti library and Penndraw the brain scans in 2D for each move expected (instruction)
 
 ### Game GUI
+#### GameLauncher
+main(): Launches the game
+
 #### DataProcessor
 isUsingData(): Checks if the game is using data, otherwise the "w" key has to be pressed to play
 
