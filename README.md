@@ -91,7 +91,7 @@ GUIClinician class is designed to show fMRI brain scans to clinicians. First fMR
 
 ### Game GUI
 
-The Game GUI takes in instructions (the expected moves from the data) and show them on the screen for the player to see. If the kid has followed the instruction (meaning that the predicted move equals the expected move) then the balloon goes up. The game ends after 36 tasks and shows the accuracy of the kid's moves.
+The Game GUI takes in instructions (the expected moves from the data) and show them on the screen for the player to see. If the kid has followed the instruction (meaning that the predicted move equals the expected move) then the balloon goes up. The game ends after 36 tasks and shows the accuracy of the kid's moves. The 36 tasks are the last 36 tasks of the test data set, this was to reduce the running time of the simulated game.
 
 ## Classes and methods
 ### Classifier
