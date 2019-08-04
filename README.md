@@ -21,7 +21,7 @@ git clone https://github.com/cit-591/final-project-summer-2019-neuralfeedback.gi
 ```
 2 create a new Java project in Eclipse, uncheck "Use default location", choose your local project folder **591-final-project-neural-feedback**, and also choose **JavaSE-11** as execution environment under "JRE"
 
-![GitHub Logo](/JavaEnv.jpeg)
+![GitHub Logo](/readme-img/JavaEnv.jpeg)
 
 3 Make sure all libraries (Weka, Slick2D, Nifti) are imported. If it is not the case, right click on your project, go to build path / configure build path / libraries / external JARs and search the Weka folder to add the Weka.Jar file (not the Weka-src.jar), then go the the nifti folder and add the niftijio-1.0-SNAPSHOT.jar file and finally add all .jar files from the Slick2d folder.
 
