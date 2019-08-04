@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class DataProcessor {
-	private int arrayIndex = 0;
+	private int arrayIndex = 36;
 	private boolean rightMove;
 
 	/**
@@ -31,7 +31,7 @@ public class DataProcessor {
 	 * @return
 	 */
 	public boolean getData() {
-		FmriClassification cl = new FmriClassification();
+		FMRIClassification cl = new FMRIClassification();
 		ArrayList<String> actualMoves = cl.getActualMoves();
 		ArrayList<String> predictedMoves = cl.getPredictions();
 		try {

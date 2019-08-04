@@ -8,7 +8,7 @@ public class ThreadClinician extends Thread {
 	 */
 	@Override
 	public void run() {
-		FmriClassification c = new FmriClassification();
+		FMRIClassification c = new FMRIClassification();
 		c.svmClassify();
 		c.printToText();
 		ArrayList<String> actualMoves = c.getActualMoves();

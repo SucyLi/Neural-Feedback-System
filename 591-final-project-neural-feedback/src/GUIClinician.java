@@ -10,6 +10,49 @@ public class GUIClinician {
 	boolean startDisplay = false;
 	NiftiVolume volume;
 	String fileName;
+	
+	/**
+	 * @return the nx
+	 */
+	public int getNx() {
+		return nx;
+	}
+
+	/**
+	 * @return the ny
+	 */
+	public int getNy() {
+		return ny;
+	}
+
+	/**
+	 * @return the nz
+	 */
+	public int getNz() {
+		return nz;
+	}
+
+	/**
+	 * @return the task
+	 */
+	public int getTask() {
+		return task;
+	}
+
+	/**
+	 * @return the volume
+	 */
+	public NiftiVolume getVolume() {
+		return volume;
+	}
+
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
 
 	/**
 	 * Clinician GUI constructor that takes dimensions of the data
@@ -42,7 +85,7 @@ public class GUIClinician {
 	 */
 	public void draw(ArrayList<String> actualMoves, ArrayList<String> predictedMoves) {
 		PennDraw.enableAnimation(12); // 30 / 2.5
-		for (int t = 0; t < task; t++) {
+		for (int t = 36; t < task; t++) {
 			String actualLabel = actualMoves.get(t);
 			String predLabel = predictedMoves.get(t);
 			

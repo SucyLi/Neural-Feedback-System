@@ -15,6 +15,23 @@ public class Sky {
 		this.x = x;
 		this.y = y;
 	}
+	
+
+	/**
+	 * @return the x
+	 */
+	public float getX() {
+		return x;
+	}
+
+
+	/**
+	 * @return the y
+	 */
+	public float getY() {
+		return y;
+	}
+
 
 	/**
 	 * Method to make sky move in the background

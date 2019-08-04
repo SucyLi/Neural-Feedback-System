@@ -5,7 +5,7 @@ import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
 
-public class FmriClassification {
+public class FMRIClassification {
 	private static ArrayList<String> predictions = new ArrayList<String>();
 	private static ArrayList<String> actualMoves = new ArrayList<String>();
 
@@ -21,7 +21,7 @@ public class FmriClassification {
 	 * @return an array list of string with each element being a predicted move
 	 */
 	public ArrayList<String> svmClassify() {
-		FmriClassificationModel classification = new FmriClassificationModel();
+		FMRIClassificationModel classification = new FMRIClassificationModel();
 		Instances trainingDataset = classification.getTrainingData();
 		Instances testDataset = classification.getTestData();
 		// build SVM model

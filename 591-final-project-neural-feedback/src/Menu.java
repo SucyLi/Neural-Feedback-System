@@ -47,12 +47,11 @@ public class Menu extends BasicGameState {
 
 		if (bEnterPressedOnce) {
 			g.drawString("Motor Game Instruction", (SetupGame.SCREEN_X / 2 - 70), (SetupGame.SCREEN_Y / 2 - 200));
-			g.drawString("Please follow the movement instruction on the screen and take corresponding movement.",
+			g.drawString(
+					"Please follow the movement instruction on the screen and take corresponding movement.\n"
+							+ "If you perform the movement correctly, a balloon will go up. "
+							+ "Try your best to keep\nthe balloon going up!\nReady? Press ENTER to start.",
 					(SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 150));
-			g.drawString("If you perform the movement correctly, a balloon will go up. Try your best to keep ",
-					(SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 100));
-			g.drawString("the balloon going up!", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 50));
-			g.drawString("Ready? Press ENTER to start.", (SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2));
 		} else {
 			Image screenStartTitle = new Image("sprites/screen-start-title.png");
 			screenStartTitle.draw(275, 400);

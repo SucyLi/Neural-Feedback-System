@@ -11,7 +11,7 @@ import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
 
-public class FmriClassificationModel {
+public class FMRIClassificationModel {
 
 	/**
 	 * Method to load training data which will be used to build classifier models

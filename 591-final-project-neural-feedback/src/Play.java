@@ -25,7 +25,7 @@ public class Play extends BasicGameState {
 	InputProcessor ip;
 	InputReader ir;
 	TrueTypeFont ttf;
-	FmriClassification cl;
+	FMRIClassification cl;
 	ArrayList<String> actualMoves;
 
 	/**
@@ -48,7 +48,7 @@ public class Play extends BasicGameState {
 		dp = new DataProcessor();
 		ip = new InputProcessor();
 		ir = new InputReader();
-		cl = new FmriClassification();
+		cl = new FMRIClassification();
 		// sprite classes
 		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2, 0.3f, 0.5f, new Image("sprites/balloon-3.png"));
 		sky1 = new Sky(0, (-SetupGame.SKY_DIMENSION_Y + SetupGame.SCREEN_Y));
@@ -135,13 +135,12 @@ public class Play extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
 		actualMovesIndex = dp.getArrayIndex();
-		if (actualMovesIndex < 72) {
+		if (actualMovesIndex < actualMoves.size()) {
 			ir.updateGameInput(gc.getInput());
 			currTime = System.currentTimeMillis();
 			// process input
 			if (dp.isUsingData()) {
-				while ((currTime - lastMoveTime) > 2432) {
-
+				while ((currTime - lastMoveTime) > 2480) {
 					actualMovesIndex = dp.getArrayIndex();
 					lastMoveTime = currTime;
 					
@@ -153,7 +152,6 @@ public class Play extends BasicGameState {
 						ip.updateInputData(dp.getData(), currTime);
 					} catch (IndexOutOfBoundsException e) {
 
-						
 					}
 				}
 			} else {
@@ -173,7 +171,7 @@ public class Play extends BasicGameState {
 			sky1.scroll(modSkySpeed);
 			sky2.scroll(modSkySpeed);
 		}
-		else if (actualMovesIndex >= 72){
+		else if (actualMovesIndex >= actualMoves.size()){
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
