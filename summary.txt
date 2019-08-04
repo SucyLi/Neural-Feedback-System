@@ -1,0 +1,56 @@
+Project Name: Neural Network Motor Game
+
+Description:
+Autistic children perceive external environment atypically according to current research. 
+This real-time neural feedback simulation system is to help children with Autism to learn how to perform motor tasks correctly. 
+It will take neural data (fMRI) as the input, use machine learning classifier to classify the signal, show the classification result in 2 perspectives - clinician's view and kid's view. 
+Clinician's GUI shows brain axial scans with expected and detected labels. 
+Kid's GUI uses a balloon flight game to tell kids feedback if they are performing the task correctly. 
+
+Team:
+Benjamin Lopez Barba, Ervin Gan, Xinhui Li
+
+Work Breakdown:
+Benjamin: build Game GUI, add corresponding JUnit tests, record video 
+Ervin: build machine learning classifiers, help with Game GUI, add corresponding JUnit tests, organize all libraries and scripts 
+Xinhui: test machine learning classifiers, build Clinician GUI, preprocess fMRI data, add corresponding JUnit tests
+
+
+Room for Improvement
+
+1 Preprocessing
+Add extraction code to extract features from raw NIfTI fMRI data
+
+2 Machine Learning Improvements
+1) train classifier with more data, tune parameters to improve test accuracy 
+2) try advanced classifiers such as CNN+RNN 
+3) Use another data set for our simulation instead of our test data set which we already used to test our models
+
+3 Clinician GUI
+1) except showing axial scans, also offer sagittal and coronal view 
+2) Use high-resolution data to have a less blurry view of the brain scans
+
+
+4 Real-time Processing
+add a class to process real-time data input in real life, pass the input to clinician GUI and kid GUI simultaneously
+
+
+5 GAME GUI
+1) (design) Sprite Parent Class:
+Had there been more sprite types that required movement, created a sprite abstract class or a sprite interface would have made sense.  
+However, given that the balloon and sky were the only moving sprites, this was unnecessary for this project.
+
+2) (design) Menu Parent Class:
+There is currently a start menu and an end screen.  
+Again, had there been more screens, a parent class could have made sense that bundled up some of the similar functionality.
+
+3) (design) Bridge Class:
+One key part of this project included coordinating communication between the game view and clinician view.  
+It is possible we could have created a class dedicated to handling this communication.  
+It could have been in charge of all game time and data sending.
+
+4) (feature) Keyboard Input:
+With more time, I would have liked to have created a version of the game that could be played with computer input.  
+However, that was more as a bonus feature or nice to have than central to the project.
+
+
