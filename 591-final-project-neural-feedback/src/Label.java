@@ -37,7 +37,7 @@ public class Label {
 
 	/**
 	 * Check to see if a label should be drawn by comparing the time of the last
-	 * label to the current time. If is higher than 6000ms, then draw label.
+	 * label to the current time. If is higher than 3000ms, then draw label.
 	 * 
 	 * @param currTime the current time in milliseconds recorded by the system
 	 * @return true if a label should be drawn, false otherwise
@@ -52,7 +52,7 @@ public class Label {
 	}
 
 	/**
-	 * Method to get label image depending on the move
+	 * Method to get label image depending for the instruction move
 	 * 
 	 * @return an image depending on the move from array list
 	 * @throws SlickException

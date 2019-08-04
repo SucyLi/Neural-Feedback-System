@@ -73,7 +73,7 @@ public class GUIClinician {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * The convertIntensityToPixelValue method is to convert intensities in fMRI raw
 	 * data to gray scale values
@@ -85,7 +85,6 @@ public class GUIClinician {
 	 * @return normalized 2D slice
 	 */
 	public double[][] convertIntensityToPixelValue(int nx, int ny, int z, int t) {
-
 		double slice[][] = new double[nx][ny];
 		double maxIntensity = 0;
 
@@ -124,9 +123,9 @@ public class GUIClinician {
 			String actualLabel = actualMoves.get(t);
 			String predLabel = predictedMoves.get(t);
 			for (int z = 0; z < nz; z++) {
-				
+
 				double slice[][] = convertIntensityToPixelValue(nx, ny, z, t);
-				
+
 				for (int i = 0; i < nx; i++) {
 					for (int j = 0; j < ny; j++) {
 						int pixelValue = (int) slice[i][j];

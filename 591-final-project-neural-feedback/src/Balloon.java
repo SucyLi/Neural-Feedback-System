@@ -10,7 +10,15 @@ public class Balloon {
 	float speed;
 	float scale;
 	Image img;
-
+	
+	/**
+	 * Balloon constructor
+	 * @param x
+	 * @param y
+	 * @param speed
+	 * @param scale
+	 * @param img the image of the balloon
+	 */
 	public Balloon(int x, int y, float speed, float scale, Image img) {
 		this.x = x;
 		this.y = y;
@@ -19,7 +27,11 @@ public class Balloon {
 		this.scale = scale;
 		this.img = img;
 	}
-
+	
+	/**
+	 * Updates the positions of the balloon
+	 * @param balloon a balloon object
+	 */
 	public static void updatePosition(Balloon balloon) {
 		balloon.y -= balloon.speed;
 		if (balloon.y < -250) {

@@ -34,14 +34,13 @@ public class DataProcessor {
 		return false;
 	}
 
-	// should return true if input was successful
-	// this runs every frame so should only return data every once in a while
+	
 	/**
 	 * Check if the input was successfully, meaning that we compare the predicted
 	 * move (from SVM model) to the instruction (which is in our case actual move
 	 * since we are using simulated data).
 	 * 
-	 * @return
+	 * @return true if the actual move is equal to the predicted move, false otherwise
 	 */
 	public boolean getData() {
 		FMRIClassification cl = new FMRIClassification();
@@ -83,7 +82,7 @@ public class DataProcessor {
 	}
 
 	/**
-	 * Set input success to true and update current time
+	 * Set input success to true and update current time after an input
 	 * 
 	 * @param currTime the current time in milliseconds recorded by the system
 	 */
