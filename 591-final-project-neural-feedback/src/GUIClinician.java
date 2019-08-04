@@ -10,6 +10,7 @@ public class GUIClinician {
 	boolean startDisplay = false;
 	NiftiVolume volume;
 	String fileName;
+	public static boolean clinicianLoadSuccess = false;
 	
 	/**
 	 * @return the nx
@@ -84,14 +85,11 @@ public class GUIClinician {
 	 *                       game)
 	 */
 	public void draw(ArrayList<String> actualMoves, ArrayList<String> predictedMoves) {
+		clinicianLoadSuccess = true;
 		PennDraw.enableAnimation(12); // 30 / 2.5
 		for (int t = 36; t < task; t++) {
 			String actualLabel = actualMoves.get(t);
 			String predLabel = predictedMoves.get(t);
-			
-//			long currTime = System.currentTimeMillis();
-//			System.out.println("clinician GUI time: " + currTime);
-
 			for (int z = 0; z < nz; z++) {
 				double slice[][] = new double[nx][ny];
 				double maxIntensity = 0;

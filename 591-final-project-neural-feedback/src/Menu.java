@@ -72,7 +72,6 @@ public class Menu extends BasicGameState {
 		for (int i = 0; i < NUM_BALLOONS; i++) {
 			Balloon.updatePosition(balloons[i]);
 		}
-
 		Input input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_ENTER) && bEnterPressedOnce) {
 			if ((currTime - enterPressedTime) > INPUT_DELAY) {
@@ -80,23 +79,13 @@ public class Menu extends BasicGameState {
 				enterPressedTwiceTime = currTime;
 			}
 		}
-
 		if (bEnterPressedTwice) {
 			if ((currTime - enterPressedTwiceTime) > INPUT_DELAY) {
+				sbg.enterState(1);
 				Thread threadClinician = new ThreadClinician();
 				threadClinician.start();
-				try {
-					Thread.sleep(3500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				
-				sbg.enterState(1);
 			}
 		}
-	
-		
 		if (input.isKeyDown(Input.KEY_ENTER)) {
 			enterPressedTime = System.currentTimeMillis();
 			bEnterPressedOnce = true;

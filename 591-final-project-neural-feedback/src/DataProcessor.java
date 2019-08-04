@@ -43,7 +43,6 @@ public class DataProcessor {
 		} catch (IndexOutOfBoundsException e) {
 
 		}
-
 		arrayIndex++;
 		rightMove = false;
 		return false;

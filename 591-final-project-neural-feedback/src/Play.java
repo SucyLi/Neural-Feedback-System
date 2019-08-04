@@ -79,7 +79,6 @@ public class Play extends BasicGameState {
 		Image imgSky = new Image("sprites/bg-sky-vert-1.png");
 		Image imgSky2 = new Image("sprites/bg-sky-vert-2.png");
 		
-		
 		// balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
@@ -120,22 +119,25 @@ public class Play extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
 		actualMovesIndex = dp.getArrayIndex();
+		while (!GUIClinician.clinicianLoadSuccess) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		if (actualMovesIndex < 72) {
 			ir.updateGameInput(gc.getInput());
 			currTime = System.currentTimeMillis();
-			
 			// process input
 			if (dp.isUsingData()) {
 				while ((currTime - lastMoveTime) > 2500) {
-
-					actualMovesIndex = dp.getArrayIndex();
 					lastMoveTime = currTime;
-					
 					// should label be drawn
 					try {
 						label.bDraw = true;
 						label.setLabelDrawInfo(actualMoves.get(actualMovesIndex), currTime);
-						
 						ip.updateInputData(dp.getData(), currTime);
 					} catch (IndexOutOfBoundsException e) {
 						System.out.println("Play.update IndexOutOfBoundsException");
@@ -149,17 +151,13 @@ public class Play extends BasicGameState {
 					}
 				}
 			}
-			
 			// update sky speed
 			int modSkySpeed = Sky.getModSkySpeed(ip.isInputProcessing(currTime));
-			
-			
 			// update balloon elevation
 			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 				balloon.elevationTimer = currTime;
 				balloon.elevation += 1;
 			}
-			
 			// move sky
 			sky1.scroll(modSkySpeed);
 			sky2.scroll(modSkySpeed);
