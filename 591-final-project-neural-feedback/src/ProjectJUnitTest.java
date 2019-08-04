@@ -207,7 +207,7 @@ public class ProjectJUnitTest {
 		dp.updateInputData(true, 1000);
 		assertTrue(dp.bInputSuccess);
 		assertEquals(1000, dp.lastInputTime);
-		assertTrue(dp.isInputProcessing(1005));
+		assertTrue(dp.isInputProcessing(1500));
 	}
 
 	/**
