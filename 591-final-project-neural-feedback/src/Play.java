@@ -11,8 +11,8 @@ import java.awt.Font;
 public class Play extends BasicGameState {
 	boolean bUsingData;
 	boolean bDrawLabel;
-	int numSuccess;
-	int numFails;
+	static public int numSuccess;
+	static public int numFail;
 	int actualMovesIndex;
 	long lastMoveTime;
 	long currTime;
@@ -103,11 +103,12 @@ public class Play extends BasicGameState {
 			if (dp.isRightMove()) {
 				g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 			} else if (!dp.isRightMove()) {
-				g.drawString("WRONG MOVE.", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
+				g.drawString("WRONG MOVE.", (SetupGame.SCREEN_X / 2 - 120), (SetupGame.SCREEN_Y / 2 - 50));
 			}
 		}
 	
 		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
+		g.drawString("Score: " + numSuccess + " / " + (numSuccess + numFail), SetupGame.SCREEN_X - 250, 40);
 	}
 
 	/**
@@ -138,6 +139,13 @@ public class Play extends BasicGameState {
 						ip.updateInputData(dp.getData(), currTime);
 					} catch (IndexOutOfBoundsException e) {
 						System.out.println("Play.update IndexOutOfBoundsException");
+					}
+					
+					//update stats
+					if (dp.isRightMove()) {
+						numSuccess++;	
+					} else{
+						numFail++;
 					}
 				}
 			}
