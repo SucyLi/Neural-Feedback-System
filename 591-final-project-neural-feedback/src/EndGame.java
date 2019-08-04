@@ -29,7 +29,7 @@ public class EndGame extends BasicGameState {
 		Font font = new Font("Helvetica", Font.BOLD, 100);
 		TrueTypeFont ttf = new TrueTypeFont(font, true);
 		g.setFont(ttf);
-		g.drawString(roundedAccuracy + "%", (SetupGame.SCREEN_X / 2 - 120), (SetupGame.SCREEN_Y / 2 + 100));
+		g.drawString(roundedAccuracy + "%", (SetupGame.SCREEN_X / 2 - 110), (SetupGame.SCREEN_Y / 2 + 100));
 	}
 
 	/**

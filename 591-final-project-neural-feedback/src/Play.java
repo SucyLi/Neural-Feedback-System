@@ -11,6 +11,8 @@ import java.awt.Font;
 public class Play extends BasicGameState {
 	boolean bUsingData;
 	boolean bDrawLabel;
+	static private final int FEEDBACK_DURATION = 1100;
+	static public final int MOVE_DELAY = 200;
 	static public int numSuccess;
 	static public int numFail;
 	int actualMovesIndex;
@@ -83,7 +85,7 @@ public class Play extends BasicGameState {
 		actualMovesIndex = dp.getArrayIndex();
 
 		// create labels
-		if ((currTime - label.lastLabelDrawTime) > 1400) {
+		if ((currTime - label.lastLabelDrawTime) < 1400) {
 			if (label.bDraw) {
 				label.getLabelImage().draw(125, (SetupGame.SCREEN_Y - 225));
 				label.bVisible = true;
@@ -96,7 +98,7 @@ public class Play extends BasicGameState {
 		g.setFont(ttf);
 
 		// Displays good job if it the player made the right move, wrong move otherwise
-		if ((currTime - lastMoveTime) < 1000) {
+		if (((currTime - lastMoveTime) < FEEDBACK_DURATION) && ((currTime - lastMoveTime) > MOVE_DELAY)) {
 			if (dp.isRightMove()) {
 				g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 			} else if (!dp.isRightMove()) {
@@ -117,6 +119,8 @@ public class Play extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
 		actualMovesIndex = dp.getArrayIndex();
+		
+		//wait for clinician view to load
 		while (!GUIClinician.clinicianLoadSuccess) {
 			try {
 				Thread.sleep(10);
@@ -125,6 +129,8 @@ public class Play extends BasicGameState {
 				e.printStackTrace();
 			}
 		}
+		
+		//get the move to perform and set up label info
 		if (actualMovesIndex < 72) {
 			currTime = System.currentTimeMillis();
 			// process input
@@ -148,8 +154,10 @@ public class Play extends BasicGameState {
 					}
 				}
 			}
+			
 			// update sky speed
 			int modSkySpeed = Sky.getModSkySpeed(dp.isInputProcessing(currTime));
+			
 			// update balloon elevation
 			if (currTime - balloon.elevationTimer > (480 / modSkySpeed)) {
 				balloon.elevationTimer = currTime;
@@ -165,7 +173,6 @@ public class Play extends BasicGameState {
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 

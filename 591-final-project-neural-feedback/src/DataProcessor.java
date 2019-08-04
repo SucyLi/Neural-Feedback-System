@@ -70,10 +70,13 @@ public class DataProcessor {
 	 */
 	public boolean isInputProcessing(long currentTime) {
 		if (bInputSuccess) {
-			if (currentTime - this.lastInputTime < INPUT_WAIT) {
-				return true;
-			} else {
-				this.bInputSuccess = false;
+			long timeElapsed = currentTime - this.lastInputTime;
+			if (timeElapsed > Play.MOVE_DELAY) {
+				if ((timeElapsed < INPUT_WAIT)){
+					return true;
+				} else {
+					this.bInputSuccess = false;
+				}
 			}
 		}
 		return false;
