@@ -1,5 +1,8 @@
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -84,14 +87,11 @@ public class ProjectJUnitTest {
 				e.printStackTrace();
 			}
 		}
-
 		boolean svmIsBetter = false;
 		if (svmCount > treeCount && svmCount > nbCount) {
 			svmIsBetter = true;
 		}
-
 		assertTrue(svmIsBetter);
-
 	}
 
 	/**
@@ -141,10 +141,10 @@ public class ProjectJUnitTest {
 	void skySpeed() {
 		Sky s = new Sky(0, 0);
 		s.scroll(1);
-		
+
 		assertTrue(Math.abs(s.getY() - 0.3) <= 1E-6);
 	}
-	
+
 	/**
 	 * Tests sky speed modifier
 	 */
@@ -153,7 +153,7 @@ public class ProjectJUnitTest {
 		assertEquals(6, Sky.getModSkySpeed(true));
 		assertEquals(1, Sky.getModSkySpeed(false));
 	}
-	
+
 	/**
 	 * Tests balloon speed
 	 */
@@ -174,7 +174,7 @@ public class ProjectJUnitTest {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	/**
 	 * Tests file loading
 	 */
@@ -183,7 +183,20 @@ public class ProjectJUnitTest {
 		DataProcessor dp = new DataProcessor();
 		assertTrue(dp.isUsingData());
 	}
-	
+
+	/**
+	 * Tests input check between actual move and prediction
+	 */
+	@Test
+	void testGetData() {
+		DataProcessor dp = new DataProcessor();
+		FMRIClassification cl = new FMRIClassification();
+		cl.svmClassify();
+		// the 36th actual move of our array list actual moves starting at
+		// matches with the 36th prediction so it should return true
+		assertTrue(dp.getData());
+	}
+
 	/**
 	 * Tests input data detection
 	 */
@@ -195,7 +208,7 @@ public class ProjectJUnitTest {
 		assertEquals(1000, dp.lastInputTime);
 		assertTrue(dp.isInputProcessing(1005));
 	}
-	
+
 	/**
 	 * Tests whether label should be drawn
 	 */
@@ -206,7 +219,7 @@ public class ProjectJUnitTest {
 		assertTrue(label.shouldDrawLabel(4000));
 		assertTrue(!label.shouldDrawLabel(1));
 	}
-	
+
 	/**
 	 * Tests setting of label info
 	 */
@@ -217,7 +230,7 @@ public class ProjectJUnitTest {
 		label.setLabelDrawInfo("Foot", 1000);
 		assertEquals("Resting", label.ID);
 		assertEquals(0, label.lastLabelDrawTime);
-		
+
 		label.bDraw = true;
 		label.setLabelDrawInfo("Foot", 1000);
 		assertEquals("Foot", label.ID);

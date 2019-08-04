@@ -46,18 +46,19 @@ public class Play extends BasicGameState {
 		dp = new DataProcessor();
 		cl = new FMRIClassification();
 		// sprite classes
-		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2, 0.3f, 0.5f, new Image("sprites/balloon-3.png"));
+		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2, 0.3f, 0.5f,
+				new Image("sprites/balloon-3.png"));
 		sky1 = new Sky(0, (-SetupGame.SKY_DIMENSION_Y + SetupGame.SCREEN_Y));
 		sky2 = new Sky(0, ((-SetupGame.SKY_DIMENSION_Y * 2) + SetupGame.SCREEN_Y));
 		label = new Label();
 		lastMoveTime = 0;
 		actualMoves = new ArrayList<>();
-		
+
 		// init variables
 		dp.bInputSuccess = false;
 		bUsingData = false;
 		bDrawLabel = false;
-		
+
 		actualMoves = cl.getActualMoves();
 		actualMovesIndex = 0;
 		Font font = new Font("Helvetica", Font.BOLD, 30);
@@ -74,12 +75,13 @@ public class Play extends BasicGameState {
 		// TODO Auto-generated method stub
 		Image imgSky = new Image("sprites/bg-sky-vert-1.png");
 		Image imgSky2 = new Image("sprites/bg-sky-vert-2.png");
-		
+
 		// balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
 		balloon.img.draw(balloon.x, balloon.y, balloon.scale);
-	
+		actualMovesIndex = dp.getArrayIndex();
+
 		// create labels
 		if ((currTime - label.lastLabelDrawTime) > 1400) {
 			if (label.bDraw) {
@@ -89,10 +91,10 @@ public class Play extends BasicGameState {
 				label.bVisible = false;
 			}
 		}
-		
+
 		// write text
 		g.setFont(ttf);
-		
+
 		// Displays good job if it the player made the right move, wrong move otherwise
 		if ((currTime - lastMoveTime) < 1000) {
 			if (dp.isRightMove()) {
@@ -101,7 +103,7 @@ public class Play extends BasicGameState {
 				g.drawString("WRONG MOVE.", (SetupGame.SCREEN_X / 2 - 120), (SetupGame.SCREEN_Y / 2 - 50));
 			}
 		}
-	
+
 		g.drawString("Elevation: " + balloon.elevation, SetupGame.SCREEN_X - 250, 0);
 		g.drawString("Score: " + numSuccess + " / " + (numSuccess + numFail), SetupGame.SCREEN_X - 250, 40);
 	}
@@ -137,11 +139,11 @@ public class Play extends BasicGameState {
 					} catch (IndexOutOfBoundsException e) {
 						System.out.println("Play.update IndexOutOfBoundsException");
 					}
-					
-					//update stats
+
+					// update stats
 					if (dp.isRightMove()) {
-						numSuccess++;	
-					} else{
+						numSuccess++;
+					} else {
 						numFail++;
 					}
 				}
@@ -156,8 +158,7 @@ public class Play extends BasicGameState {
 			// move sky
 			sky1.scroll(modSkySpeed);
 			sky2.scroll(modSkySpeed);
-		}
-		else if (actualMovesIndex >= 72){
+		} else if (actualMovesIndex >= 72) {
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
 	}

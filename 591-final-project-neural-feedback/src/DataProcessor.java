@@ -8,7 +8,7 @@ public class DataProcessor {
 	int lastLabelDrawTime = 0;
 	boolean bInputSuccess = false;
 	long lastInputTime = 0;
-	
+
 	/**
 	 * Data processor constructor initializing the inputSuccess check and the time
 	 * of the input
@@ -17,7 +17,7 @@ public class DataProcessor {
 		this.bInputSuccess = false;
 		this.lastInputTime = 0;
 	}
-	
+
 	/**
 	 * Check if the game is using data by checking if the file is there. This can
 	 * eventually become a scanner taking in the file that the user wants to use but
@@ -54,13 +54,12 @@ public class DataProcessor {
 				return true;
 			}
 		} catch (IndexOutOfBoundsException e) {
-
+			;
 		}
 		arrayIndex++;
 		rightMove = false;
 		return false;
 	}
-	
 
 	/**
 	 * Checks if the input is processing by comparing the time between current input
