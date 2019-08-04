@@ -1,9 +1,8 @@
 import org.newdawn.slick.Input;
 
 /**
- * This class is to use for when no data is entered. Meaning that the player is
- * only playing using the key "w". In our case, we are using data so this class
- * will not be used.
+ * This class avoids input conflicts by ensuring all input is 
+ * detected in the same place for the game.
  *
  */
 public class InputReader {

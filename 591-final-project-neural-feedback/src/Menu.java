@@ -6,7 +6,10 @@ public class Menu extends BasicGameState {
 	final int INPUT_DELAY = 50;
 	
 	long enterPressedTime;
+	long enterPressedTwiceTime;
+	
 	boolean bEnterPressedOnce;
+	boolean bEnterPressedTwice;
 	Balloon balloons[];
 
 	/**
@@ -45,13 +48,12 @@ public class Menu extends BasicGameState {
 			balloons[i].img.draw(balloons[i].x, balloons[i].y, balloons[i].scale);
 		}
 
-		if (bEnterPressedOnce) {
-			g.drawString("Motor Game Instruction", (SetupGame.SCREEN_X / 2 - 70), (SetupGame.SCREEN_Y / 2 - 200));
-			g.drawString(
-					"Please follow the movement instruction on the screen and take corresponding movement.\n"
-							+ "If you perform the movement correctly, a balloon will go up. "
-							+ "Try your best to keep\nthe balloon going up!\nReady? Press ENTER to start.",
-					(SetupGame.SCREEN_X / 2 - 360), (SetupGame.SCREEN_Y / 2 - 150));
+		if (bEnterPressedTwice) {
+			Image loading =  new Image("sprites/loading.png");
+			loading.draw(0, 0);
+		} else if (bEnterPressedOnce) {
+			Image instructions =  new Image("sprites/instructions.png");
+			instructions.draw(270, 230);
 		} else {
 			Image screenStartTitle = new Image("sprites/screen-start-title.png");
 			screenStartTitle.draw(275, 400);
@@ -65,7 +67,7 @@ public class Menu extends BasicGameState {
 	 */
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-
+		long currTime = System.currentTimeMillis();
 		// update balloon position
 		for (int i = 0; i < NUM_BALLOONS; i++) {
 			Balloon.updatePosition(balloons[i]);
@@ -73,21 +75,28 @@ public class Menu extends BasicGameState {
 
 		Input input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_ENTER) && bEnterPressedOnce) {
-			if ((System.currentTimeMillis() - enterPressedTime) > INPUT_DELAY) {
-				Thread threadClinician = new ThreadClinician();
-				threadClinician.start();
-				try {
-					Thread.sleep(3500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	
-				sbg.enterState(1);
+			if ((currTime - enterPressedTime) > INPUT_DELAY) {
+				bEnterPressedTwice = true;
+				enterPressedTwiceTime = currTime;
 			}
 		}
 
-		// TODO Auto-generated method stub
+		if (bEnterPressedTwice) {
+			if ((currTime - enterPressedTwiceTime) > INPUT_DELAY) {
+				Thread threadClinician = new ThreadClinician();
+				threadClinician.start();
+				try {
+					Thread.sleep(3300);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				
+				sbg.enterState(1);
+			}
+		}
+	
+		
 		if (input.isKeyDown(Input.KEY_ENTER)) {
 			enterPressedTime = System.currentTimeMillis();
 			bEnterPressedOnce = true;
