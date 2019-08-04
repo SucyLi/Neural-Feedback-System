@@ -50,7 +50,7 @@ public class Play extends BasicGameState {
 		ir = new InputReader();
 		cl = new FmriClassification();
 		// sprite classes
-		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2);
+		balloon = new Balloon((SetupGame.SCREEN_X / 2 - 50), SetupGame.SCREEN_Y / 2, 0.3f, 0.5f, new Image("sprites/balloon-3.png"));
 		sky1 = new Sky(0, (-SetupGame.SKY_DIMENSION_Y + SetupGame.SCREEN_Y));
 		sky2 = new Sky(0, ((-SetupGame.SKY_DIMENSION_Y * 2) + SetupGame.SCREEN_Y));
 		label = new Label();
@@ -76,7 +76,6 @@ public class Play extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame arg1, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
-		Image imgBalloon = new Image("sprites/balloon.png");
 		Image imgSky = new Image("sprites/bg-sky-vert-1.png");
 		Image imgSky2 = new Image("sprites/bg-sky-vert-2.png");
 		Image labelFoot = new Image("sprites/label-foot.png");
@@ -87,7 +86,7 @@ public class Play extends BasicGameState {
 		// balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
-		imgBalloon.draw(balloon.x, balloon.y, balloon.BALLOON_SCALE);
+		balloon.img.draw(balloon.x, balloon.y, balloon.scale);
 		
 		// create labels
 		if ((currTime - label.lastLabelDrawTime) > 1400) {
@@ -120,7 +119,7 @@ public class Play extends BasicGameState {
 			if (dp.isRightMove()) {
 				g.drawString("GOOD JOB!", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 			} else if (!dp.isRightMove()) {
-				g.drawString("WRONG MOVE...", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
+				g.drawString("WRONG MOVE.", (SetupGame.SCREEN_X / 2 - 100), (SetupGame.SCREEN_Y / 2 - 50));
 			}
 		}
 	
@@ -142,16 +141,12 @@ public class Play extends BasicGameState {
 			// process input
 			if (dp.isUsingData()) {
 				while ((currTime - lastMoveTime) > 2432) {
-//					System.out.println("GET");
-//					System.out.println("kid GUI time: " + currTime);
 
 					actualMovesIndex = dp.getArrayIndex();
 					lastMoveTime = currTime;
+					
 					// should label be drawn
 					try {
-//						System.out.println("actualMovesIndex = " + actualMovesIndex);
-//						System.out.println("ID = " + actualMoves.get(actualMovesIndex));
-
 						label.bDraw = true;
 						label.setLabelDrawInfo(actualMoves.get(actualMovesIndex), currTime);
 						

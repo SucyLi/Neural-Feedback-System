@@ -1,6 +1,6 @@
 
 public class InputProcessor {
-	final int INPUT_WAIT = 2000;
+	final int INPUT_WAIT = 1000;
 	int lastLabelDrawTime = 0;
 	boolean bInputSuccess = false;
 	long lastInputTime = 0;
