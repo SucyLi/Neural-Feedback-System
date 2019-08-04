@@ -78,33 +78,17 @@ public class Play extends BasicGameState {
 		// TODO Auto-generated method stub
 		Image imgSky = new Image("sprites/bg-sky-vert-1.png");
 		Image imgSky2 = new Image("sprites/bg-sky-vert-2.png");
-		Image labelFoot = new Image("sprites/label-foot.png");
-		Image labelFinger = new Image("sprites/label-finger.png");
-		Image labelLips = new Image("sprites/label-lips.png");
-		Image labelRest = new Image("sprites/label-rest.png");
+		
 		
 		// balloon and sky positions
 		imgSky.draw(sky1.x, sky1.y);
 		imgSky2.draw(sky2.x, sky2.y);
 		balloon.img.draw(balloon.x, balloon.y, balloon.scale);
-		
+	
 		// create labels
 		if ((currTime - label.lastLabelDrawTime) > 1400) {
 			if (label.bDraw) {
-				switch (label.ID) {
-				case "Foot":
-					labelFoot.draw(125, (SetupGame.SCREEN_Y - 225));
-					break;
-				case "Finger":
-					labelFinger.draw(125, (SetupGame.SCREEN_Y - 225));
-					break;
-				case "Lips":
-					labelLips.draw(125, (SetupGame.SCREEN_Y - 225));
-					break;
-				case "Resting":
-					labelRest.draw(125, (SetupGame.SCREEN_Y - 225));
-					break;
-				}
+				label.getLabelImage().draw(125, (SetupGame.SCREEN_Y - 225));
 				label.bVisible = true;
 			} else {
 				label.bVisible = false;
@@ -135,12 +119,13 @@ public class Play extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
 		// input reader class used here in case of no data
 		actualMovesIndex = dp.getArrayIndex();
-		if (actualMovesIndex < actualMoves.size()) {
+		if (actualMovesIndex < 72) {
 			ir.updateGameInput(gc.getInput());
 			currTime = System.currentTimeMillis();
 			// process input
 			if (dp.isUsingData()) {
-				while ((currTime - lastMoveTime) > 2480) {
+				while ((currTime - lastMoveTime) > 2500) {
+
 					actualMovesIndex = dp.getArrayIndex();
 					lastMoveTime = currTime;
 					
@@ -151,7 +136,7 @@ public class Play extends BasicGameState {
 						
 						ip.updateInputData(dp.getData(), currTime);
 					} catch (IndexOutOfBoundsException e) {
-
+						System.out.println("Play.update IndexOutOfBoundsException");
 					}
 				}
 			} else {
@@ -171,7 +156,7 @@ public class Play extends BasicGameState {
 			sky1.scroll(modSkySpeed);
 			sky2.scroll(modSkySpeed);
 		}
-		else if (actualMovesIndex >= actualMoves.size()){
+		else if (actualMovesIndex >= 72){
 			sbg.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
