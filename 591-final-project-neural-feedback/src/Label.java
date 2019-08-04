@@ -1,3 +1,5 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Label {
 	static final int LABEL_WAIT = 3000;
@@ -44,5 +46,20 @@ public class Label {
 		
 		this.bUpdated = false;
 		return false;
+	}
+	
+	public Image getLabelImage() throws SlickException {
+		switch (this.ID) {
+			case "Foot":
+				return new Image("sprites/label-foot.png");
+			case "Finger":
+				return new Image("sprites/label-finger.png");
+			case "Lips":
+				return new Image("sprites/label-lips.png");
+			case "Resting":
+				return new Image("sprites/label-rest.png");
+		}
+		
+		return null;
 	}
 }
