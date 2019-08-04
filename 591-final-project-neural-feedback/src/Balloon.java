@@ -27,5 +27,20 @@ public class Balloon {
 			balloon.y = SetupGame.SCREEN_Y;
 		}
 	}
+
+	/**
+	 * @return the y
+	 */
+	public float getY() {
+		return y;
+	}
+
+	/**
+	 * @return the speed
+	 */
+	public float getSpeed() {
+		return speed;
+	}
+	
 }
 		

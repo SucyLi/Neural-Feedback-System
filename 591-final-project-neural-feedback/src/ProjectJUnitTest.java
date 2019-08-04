@@ -38,7 +38,7 @@ public class ProjectJUnitTest {
 	 * Tests classifier performance, SVM should be the best
 	 */
 	@Test
-	void classifierPerformance() {
+	void testClassifierPerformance() {
 		FMRIClassificationModel classification = new FMRIClassificationModel();
 		Instances trainingDataset = classification.getTrainingData();
 		Instances testDataset = classification.getTestData();
@@ -90,7 +90,7 @@ public class ProjectJUnitTest {
 			svmIsBetter = true;
 		}
 
-		assertEquals(true, svmIsBetter);
+		assertTrue(svmIsBetter);
 
 	}
 
@@ -139,9 +139,7 @@ public class ProjectJUnitTest {
 	 */
 	@Test
 	void skySpeed() {
-		int x = 0;
-		int y = 0;
-		Sky s = new Sky(x, y);
+		Sky s = new Sky(0, 0);
 		s.scroll(1);
 		
 		assertTrue(Math.abs(s.getY() - 0.3) <= 1E-6);
@@ -155,6 +153,28 @@ public class ProjectJUnitTest {
 		assertEquals(6, Sky.getModSkySpeed(true));
 		assertEquals(1, Sky.getModSkySpeed(false));
 	}
+	
+	/**
+	 * Tests balloon speed
+	 */
+//	@Test
+//	void balloonSpeed() {
+//		try {
+//			Balloon b = new Balloon(300, 300, 0.3f, 0.7f, new Image("sprites/balloon-1.png"));
+//			float currentY = b.getY();
+//			System.out.println(currentY);
+//			
+//			Balloon.updatePosition(b);
+//			float updatedY = b.getY();
+//			System.out.println(updatedY);
+//			
+//			assertTrue(Math.abs(currentY - updatedY - b.getSpeed()) <= 1E-6);
+//		} catch (SlickException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
 	/**
 	 * Tests file loading
 	 */

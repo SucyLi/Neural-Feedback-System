@@ -86,7 +86,7 @@ public class Menu extends BasicGameState {
 				Thread threadClinician = new ThreadClinician();
 				threadClinician.start();
 				try {
-					Thread.sleep(3300);
+					Thread.sleep(3500);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
