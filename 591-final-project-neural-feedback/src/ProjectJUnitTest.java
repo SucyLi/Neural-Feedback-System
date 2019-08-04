@@ -177,27 +177,6 @@ public class ProjectJUnitTest {
 	}
 
 	/**
-	 * Tests balloon speed
-	 */
-//	@Test
-//	void balloonSpeed() {
-//		try {
-//			Balloon b = new Balloon(300, 300, 0.3f, 0.7f, new Image("sprites/balloon-1.png"));
-//			float currentY = b.getY();
-//			System.out.println(currentY);
-//			
-//			Balloon.updatePosition(b);
-//			float updatedY = b.getY();
-//			System.out.println(updatedY);
-//			
-//			assertTrue(Math.abs(currentY - updatedY - b.getSpeed()) <= 1E-6);
-//		} catch (SlickException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
 	 * Tests file loading
 	 */
 	@Test
