@@ -3,15 +3,14 @@ import org.newdawn.slick.Image;
 public class Balloon {
 	final float BALLOON_FALL = 0.2f;
 	int elevation;
-	//allows elevation to be incremented over time instead of per frame
+	// allows elevation to be incremented over time instead of per frame
 	long elevationTimer;
 	float x;
 	float y;
 	float speed;
 	float scale;
 	Image img;
-	
-	
+
 	public Balloon(int x, int y, float speed, float scale, Image img) {
 		this.x = x;
 		this.y = y;
@@ -20,7 +19,7 @@ public class Balloon {
 		this.scale = scale;
 		this.img = img;
 	}
-	
+
 	public static void updatePosition(Balloon balloon) {
 		balloon.y -= balloon.speed;
 		if (balloon.y < -250) {
@@ -41,6 +40,5 @@ public class Balloon {
 	public float getSpeed() {
 		return speed;
 	}
-	
+
 }
-		

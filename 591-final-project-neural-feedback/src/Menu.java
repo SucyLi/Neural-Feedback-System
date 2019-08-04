@@ -4,10 +4,10 @@ import org.newdawn.slick.state.*;
 public class Menu extends BasicGameState {
 	final int NUM_BALLOONS = 5;
 	final int INPUT_DELAY = 50;
-	
+
 	long enterPressedTime;
 	long enterPressedTwiceTime;
-	
+
 	boolean bEnterPressedOnce;
 	boolean bEnterPressedTwice;
 	Balloon balloons[];
@@ -21,6 +21,9 @@ public class Menu extends BasicGameState {
 		;
 	}
 
+	/**
+	 * Initialize menu with different balloons
+	 */
 	@Override
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		bEnterPressedOnce = false;
@@ -49,17 +52,17 @@ public class Menu extends BasicGameState {
 		}
 
 		if (bEnterPressedTwice) {
-			Image loading =  new Image("sprites/loading.png");
+			Image loading = new Image("sprites/loading.png");
 			loading.draw(0, 0);
 		} else if (bEnterPressedOnce) {
-			Image instructions =  new Image("sprites/instructions.png");
+			Image instructions = new Image("sprites/instructions.png");
 			instructions.draw(270, 230);
 		} else {
 			Image screenStartTitle = new Image("sprites/screen-start-title.png");
 			screenStartTitle.draw(275, 400);
 		}
 	}
-	
+
 	/**
 	 * Method to update the game menu. If "Enter" is pressed, then the Clinician GUI
 	 * is launched with a pause allowing it to load and we go to the state number 1

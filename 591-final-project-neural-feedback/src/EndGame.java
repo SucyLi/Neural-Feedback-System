@@ -19,6 +19,9 @@ public class EndGame extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 	}
 
+	/**
+	 * Render method to display end game state with accuracy percentage of the moves
+	 */
 	@Override
 	public void render(GameContainer arg0, StateBasedGame arg1, Graphics g) throws SlickException {
 		Image bg = new Image("sprites/screen-end.png");
@@ -29,6 +32,10 @@ public class EndGame extends BasicGameState {
 		g.drawString(roundedAccuracy + "%", (SetupGame.SCREEN_X / 2 - 120), (SetupGame.SCREEN_Y / 2 + 100));
 	}
 
+	/**
+	 * Updates game by calculating accuracy percentage which will be displayed
+	 * thanks to render()
+	 */
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
 		// calculate accuracy

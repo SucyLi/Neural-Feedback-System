@@ -22,7 +22,7 @@ public class Sky {
 	public float getY() {
 		return y;
 	}
-	
+
 	/**
 	 * Scrolling speeds up when input has been detected
 	 */
@@ -30,7 +30,6 @@ public class Sky {
 		if (bIsInputProcessing) {
 			return 6;
 		}
-		
 		return 1;
 	}
 

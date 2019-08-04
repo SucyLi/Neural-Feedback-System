@@ -11,7 +11,7 @@ public class GUIClinician {
 	NiftiVolume volume;
 	String fileName;
 	public static boolean clinicianLoadSuccess = false;
-	
+
 	/**
 	 * @return the nx
 	 */
@@ -53,7 +53,6 @@ public class GUIClinician {
 	public String getFileName() {
 		return fileName;
 	}
-
 
 	/**
 	 * Clinician GUI constructor that takes dimensions of the data
