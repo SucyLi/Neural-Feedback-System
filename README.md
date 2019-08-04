@@ -23,9 +23,9 @@ git clone https://github.com/cit-591/final-project-summer-2019-neuralfeedback.gi
 
 ![GitHub Logo](/JavaEnv.jpeg)
 
+3 Make sure all libraries (Weka, Slick2D, Nifti) are imported. If it is not the case, right click on your project, go to build path / configure build path / libraries / external JARs and search the Weka folder to add the Weka.Jar file (not the Weka-src.jar), then go the the nifti folder and add the niftijio-1.0-SNAPSHOT.jar file and finally add all .jar files from the Slick2d folder.
 
-3 In Eclipse, open 591-final-project-neural-feedback/src/(default package)/GameLauncher.java, run it as Java Application
-
+4 In Eclipse, open 591-final-project-neural-feedback/src/(default package)/GameLauncher.java, run it as Java Application
 
 ## Execution Instructions
 
@@ -91,11 +91,11 @@ GUIClinician class is designed to show fMRI brain scans to clinicians. First fMR
 
 ### Game GUI
 
-
+The Game GUI takes in instructions (the expected moves from the data) and show them on the screen for the player to see. If the kid has followed the instruction (meaning that the predicted move equals the expected move) then the balloon goes up. The game ends after 36 tasks and shows the accuracy of the kid's moves.
 
 ## Classes and methods
 ### Classifier
-#### FmriClassificationModel.java
+#### FMRIClassificationModel.java
 getTrainingData(): read preprocessed fMRI training data csv file
 
 getTestData(): read preprocessed fMRI test data csv file
@@ -112,47 +112,70 @@ combineModels(): combine models using AdaBoostM1. Boost a weak classifier by run
 
 modelEvaluation(): evaluate model performance. Return statistics showing the performance of the model used
 
-#### FmriClassify.java
-main(): \
-load training and test datasets \
-implement classifier with highest accuracy on test set \
-get classification result on test set \
-generate binary classification results based on ground truth labels 
+#### FMRIClassifification.java
+svmClassify(): load training and test datasets, then implements classifier with highest accuracy on test set and get classification results on test set which are then stored in an array list.
+
+printToText(): prints to Labels.txt all expected moves and predicted moves
+
+### Clinician GUI
+#### GUIClinician
+convertIntensityToPixelValue(): Method to convert intensities in fMRI raw data to gray scale values
+
+draw(): The draw method allows to draw with the Nifti library and Penndraw the brain scans in 2D for each move expected (instruction)
 
 ### Game GUI
-#### WindowManager
-Creates game window<br/>
-Cleans up game window
-```java
-Window gameWindow
-```
-#### DisplayUpdater
-This class will update the game images and GUI.<br/>
-For instance, this class will also update positions for the player character/vehicle <br/>
-It will thus receive info from GameInputReader and PlayerStats.
-#### VehicleStats
-The vehicle the player is driving (either a car or hot air balloon)
-```java
-int positionX
-int positionY
-int damage
-```
-#### PlayerStats
-This class will keep track of the player's data.<br/>
-```java
-int Score
-double averageAccuracy
-String mostSuccessfulAction //the action with the highest average accuracy
-Vehicle vehicle
-```
-#### GameInputData
-This class will provide a structure for the data of each input instance.  Will include:<br/>
-```java
-String actionID
-boolean bActionSuccessful//true or false
-double AccuracyPercent
-```
-#### GameInputReader 
-This class will be the main communication between machine learning classes and the GUI classes.<br/>
-It will read input and fill out InputData and PlayerStats
+#### DataProcessor
+isUsingData(): Checks if the game is using data, otherwise the "w" key has to be pressed to play
 
+getData(): Check if the input was successfully, meaning that we compare the predicted move (from SVM model) to the instruction (which is in our case actual move since we are using simulated data)
+
+isInputProcessing(): Checks if the input is processing by comparing the time between current input and last time there was an input
+
+updateInputChecks(): Set input success to true and updates current time after an input
+
+updateInputData(): Update input checks if the user is using data, (which is what we are doing in our case)
+
+#### Balloon
+updatePosition(): Updates the positions of the balloon
+
+#### Sky
+getModSkySpeed(): Scrolling speeds up when input has been detected
+
+scroll(): Method to make sky move in the background
+
+#### Label
+setLabelDrawInfo(): Check to see if a new label needs to be drawn if so determine which label to draw and set time drawn
+
+shouldDrawLabel(): Check to see if a label should be drawn by comparing the time of the last label to the current time. If is higher than 3000ms, then draw label.
+
+getLabelImage(): Method to get label image depending for the instruction move
+
+#### Menu
+init(): Initializes menu game state
+
+render(): Display menu on the GUI. 
+
+update(): Updates states of the game and thus screens when pressing enter
+
+#### Play
+init(): Initializes play game state, in particular all variables and objects needed for update() and render()
+
+render(): Displays the sky, the balloon, the instruction label, the current score, and an indication to the kid for "good move" or "wrong move"
+
+update(): Updates the game by going through each element of the array list of actualMoves (i.e. instructions) at a fixed interval to match with Clinician GUI speed
+
+#### EndGame
+init(): Initializes endgame state
+
+render(): Displays the state of the end of the game, shows the score and an ending message
+
+update(): Updates the accuracy rate to display at the end
+
+#### SetupGame
+initStatesList(): Initializes all game states and specify which state to start with (which is the menu state)
+
+#### ThreadClinician
+run(): runs the machine learning classification and launches the Clinician GUI to show brain scans for all instructions. Thread created to run at the same time as gaming GUI
+
+#### ThreadGame
+run(): launches the gaming GUI. Thread created to be launched at the same time as Clinician GUI
