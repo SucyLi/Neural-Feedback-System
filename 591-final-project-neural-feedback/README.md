@@ -21,7 +21,7 @@ git clone https://github.com/cit-591/final-project-summer-2019-neuralfeedback.gi
 ```
 2 create a new Java project in Eclipse, uncheck "Use default location", choose your local project folder **591-final-project-neural-feedback**, and also choose **JavaSE-11** as execution environment under "JRE"
 
-![GitHub Logo](/readme-img/JavaEnv.jpeg)
+![GitHub Logo](/JavaEnv.jpeg)
 
 
 3 In Eclipse, open 591-final-project-neural-feedback/src/(default package)/GameLauncher.java, run it as Java Application
@@ -33,35 +33,35 @@ git clone https://github.com/cit-591/final-project-summer-2019-neuralfeedback.gi
 
 Press Enter to go to instruction page. In real life, kids will lay down in a fMRI scanner or wear an EEG headset so their neural signal will be recorded while they are performing motor tasks.
 
-![GitHub Logo](/readme-img/intro.jpeg)
+![GitHub Logo](/intro.jpeg)
 
 
 ### Instruction page
 
 Press Enter to see simulated GUI. In real life, kids will read the instruction page and press Enter when they are ready to take the tasks. 
 
-![GitHub Logo](/readme-img/instruction.jpeg)
+![GitHub Logo](/instruction.jpeg)
 
 
 ### Kid GUI
 An instruction is shown to tell kids to perform a certain motor task, like "Move Finger". At the meantime, a pre-trained machine learning classifier will read their neural signal and detect whether the kid is performing the task correctly. 
 
-![GitHub Logo](/readme-img/move-instruction.jpeg)
+![GitHub Logo](/move-instruction.jpeg)
 
 If the kid performs the task correctly, the balloon will go up faster!
 
-![GitHub Logo](/readme-img/kidGUI-right.jpeg)
+![GitHub Logo](/kidGUI-right.jpeg)
 
 If the kid doesn't perform the task correctly, the balloon will stop going up.
 
-![GitHub Logo](/readme-img/kidGUI-wrong.jpeg)
+![GitHub Logo](/kidGUI-wrong.jpeg)
 
 
 ### Clinician GUI
 A clinician GUI will synchronize with kid GUI so the clinician can learn how the kid is performing and also check the brain scan to make diagnosis decision.
 
-![GitHub Logo](/readme-img/clinicianGUI-right.jpeg)
-![GitHub Logo](/readme-img/clinicianGUI-wrong.jpeg)
+![GitHub Logo](/clinicianGUI-right.jpeg)
+![GitHub Logo](/clinicianGUI-wrong.jpeg)
 
 
 ## Design
