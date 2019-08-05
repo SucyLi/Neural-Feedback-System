@@ -6,6 +6,8 @@
 ## Description
 Autistic children perceive external environment atypically according to current research. This real-time neural feedback simulation system is to help children with Autism to learn how to perform motor tasks correctly. It will take neural data (fMRI) as the input, use machine learning classifier to classify the signal, show the classification result in 2 perspectives - clinician's view and kid's view. Clinician's GUI shows brain axial scans with expected and detected labels. Kid's GUI uses a balloon flight game to tell kids feedback if they are performing the task correctly. 
 
+Presentation video link: https://vimeo.com/351929429
+
 ## Team
 Benjamin Lopez Barba, Ervin Gan, Xinhui Li
 
