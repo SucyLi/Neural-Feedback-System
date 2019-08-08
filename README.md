@@ -17,18 +17,25 @@ Ervin: build machine learning classifiers, help with Game GUI, add corresponding
 Xinhui: test machine learning classifiers, build Clinician GUI, preprocess fMRI data, add corresponding JUnit tests
 
 ## Environment Set-up
-1 Open terminal, go to directory you want to save the project folder, type 
+
+Notice that now the app only works for MacOS.
+
+1 Download Java Development Kit 11 https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
+
+2 Install Eclipse https://www.eclipse.org/downloads/
+
+3 Open terminal, go to directory you want to save the project folder, clone this repository by typing 
 ```shell
 git clone https://github.com/cit-591/final-project-summer-2019-neuralfeedback.git
 ```
-2 create a new Java project in Eclipse, uncheck "Use default location", choose your local project folder **591-final-project-neural-feedback**, and also choose **JavaSE-11** as execution environment under "JRE"
+
+4 Create a new Java project in Eclipse, uncheck "Use default location", choose your local project folder **591-final-project-neural-feedback**, and also choose **JavaSE-11** as execution environment under "JRE"
 
 ![GitHub Logo](/readme-img/JavaEnv.jpeg)
 
+5 Make sure all libraries (Weka, Slick2D, Nifti) are imported. If it is not the case, right click on your project, go to build path / configure build path / libraries / external JARs and search the Weka folder to add the Weka.Jar file (not the Weka-src.jar), then go the the nifti folder and add the niftijio-1.0-SNAPSHOT.jar file and finally add all .jar files from the Slick2d folder.
 
-3 Make sure all libraries (Weka, Slick2D, Nifti) are imported. If it is not the case, right click on your project, go to build path / configure build path / libraries / external JARs and search the Weka folder to add the Weka.Jar file (not the Weka-src.jar), then go the the nifti folder and add the niftijio-1.0-SNAPSHOT.jar file and finally add all .jar files from the Slick2d folder.
-
-4 In Eclipse, open 591-final-project-neural-feedback/src/(default package)/GameLauncher.java, run it as Java Application
+6 In Eclipse, open 591-final-project-neural-feedback/src/(default package)/GameLauncher.java, run it as Java Application
 
 ## Execution Instructions
 
