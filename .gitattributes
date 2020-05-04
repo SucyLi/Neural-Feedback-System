@@ -1,4 +1,5 @@
 *.html linguist-detectable=false
 *.css linguist-detectable=false
+*.js linguist-detectable=false
 *.java linguist-detectable=true
 591-final-project-neural-feedback/src/* linguist-generated
